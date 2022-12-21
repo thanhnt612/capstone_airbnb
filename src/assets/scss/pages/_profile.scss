@@ -1,0 +1,48 @@
+.profile-page {
+  .container {
+    .row {
+      .info {
+        .account {
+          .avatar {
+            img {
+            }
+            .update-avatar {
+              button {
+                background: $bg-header-light;
+              }
+            }
+          }
+          .verify {
+            .identity {
+              .check-icon {
+                  font-size: $text-3xl;
+                i {
+                }
+              }
+              h5 {
+                @include text($text-2xl, $text-bold, $text-c1-dark);
+              }
+              p {
+                @include text($text-xl, $text-light, $text-c1-dark);
+              }
+            }
+            .button {
+              .btn {
+              }
+            }
+            .check-profile {
+              p {
+                @include text($text-2xl, $text-bold, $text-c1-dark);
+              }
+              .confirm {
+                @include text($text-xl, $text-light, $text-c1-dark);
+              }
+            }
+          }
+        }
+      }
+      .history {
+      }
+    }
+  }
+}

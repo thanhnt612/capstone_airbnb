@@ -1,0 +1,75 @@
+.register-page {
+  .row {
+    min-height: 500px;
+    padding: 30px;
+    background-color: $bg-header-light;
+    box-shadow: 0 15px 16.83px 0.17px rgba(0, 0, 0, 0.05);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    .signup-content {
+      .signup-form {
+        .form-title {
+          padding: 20px 0;
+        }
+        .register-form {
+          .form-group {
+            margin-bottom: 25px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #999;
+            label {
+            }
+            input {
+              width: 100%;
+              display: block;
+              border: none;
+              outline: none;
+              padding: 6px 30px;
+            }
+          }
+          .radioGroup {
+            padding: 10px 0px;
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            span {
+              margin: 0;
+            }
+            input[type="radio"] {
+              width: 15px;
+              height: 2em;
+              accent-color: $bg-header-main;
+              cursor: pointer;
+            }
+            label {
+              font-size: $text-xl;
+            }
+            .radioButton {
+              margin: 0 5px;
+            }
+          }
+          .button {
+            .btn-register {
+              background: $bg-header-main;
+              padding: 10px 40px;
+              color: $text-c1-light;
+              border-radius: 5px;
+              margin-top: 25px;
+              margin-right: 10px;
+              border: none;
+              &:hover {
+                opacity: 0.5;
+                transition: 0.3s;
+              }
+            }
+            a {
+              color: $text-c1-main;
+            }
+          }
+        }
+      }
+    }
+  }
+}

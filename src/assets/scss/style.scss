@@ -1,0 +1,20 @@
+/*-----------------Themes---------------------*/
+@import "./themes/base";
+@import "./themes/mixin";
+@import "./themes/variable";
+
+/*------------------Component--------------------*/
+@import "./components/HeaderHome";
+@import "./components/FooterHome";
+
+/*-----------------Templates---------------------*/
+@import "./templates//HomeTemplate";
+@import "./templates/UserTemplate";
+
+/*------------------Pages--------------------*/
+@import "./pages/detail";
+@import "./pages/home";
+@import "./pages/login";
+@import "./pages/profile";
+@import "./pages/register";
+@import "./pages/list";

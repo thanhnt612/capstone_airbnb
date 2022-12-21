@@ -1,0 +1,13 @@
+@mixin text($fz, $fw, $c) {
+    font-size: $fz;
+    font-weight: $fw;
+    color: $c;
+}
+
+@mixin button($fz, $fw, $c, $bg, $pd) {
+    @include text($fz, $fw, $c);
+    background: $bg;
+    padding: $pd;
+    cursor: pointer;
+}
+

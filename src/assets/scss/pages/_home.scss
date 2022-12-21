@@ -1,0 +1,70 @@
+.home-page {
+  .carousel {
+    background: url(../../img/ha2.jpg) center center / cover no-repeat;
+    width: 100%;
+    min-height: 850px;
+    opacity: 1;
+    top: -80px;
+    &::after {
+      content: "";
+      position: absolute;
+      z-index: 1;
+      top: 0px;
+      left: 0px;
+      width: 100%;
+      min-height: 850px;
+      background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.3));
+      opacity: 0.8;
+    }
+    .introduce {
+      z-index: 5;
+      position: relative;
+      width: 100%;
+      transform: translate(0, 200%);
+      color: $text-c1-light;
+      h3 {
+      }
+      h4 {
+        padding: 20px 0;
+      }
+      .btn {
+        color: $text-c1-light;
+        background-color: $bg-header-main;
+        cursor: pointer;
+      }
+    }
+  }
+  .content {
+    .container {
+      .menu-list {
+        .tittle {
+          h3 {
+          }
+        }
+        .menu {
+        }
+      }
+      .convenient {
+        .tittle {
+          h3 {
+          }
+        }
+        .row {
+          .item {
+            padding: 25px;
+
+            .thumbnail {
+              img {
+                height: 200px;
+                border-radius: 10px;
+              }
+            }
+            p {
+              padding-top: 5px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
