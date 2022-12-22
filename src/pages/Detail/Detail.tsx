@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink, useParams } from 'react-router-dom'
+import { NavLink, useNavigate, useParams } from 'react-router-dom'
 import { DispatchType, RootState } from '../../redux/configStore';
 import { getBookingDetailApi, postBookingApi } from '../../redux/reducers/bookingReducer';
 import { DateRangePicker, RangeKeyDict } from "react-date-range"
@@ -15,6 +15,7 @@ export default function Detail({ }: Props) {
   const { arrDetail } = useSelector((state: RootState) => state.bookingReducer);
   const { userLogin } = useSelector((state: RootState) => state.userReduder);
   const dispatch: DispatchType = useDispatch();
+  const navigate = useNavigate()
   //Lấy param id từ url
   const params: any = useParams();
   useEffect(() => {
@@ -69,6 +70,8 @@ export default function Detail({ }: Props) {
     const guest = target.guest.value;
     const action = postBookingApi(arrDetail?.id, arrDetail?.id, dateIn, dateOut, guest, userLogin.user.id)
     dispatch(action);
+    alert('Xác nhận đã đặt phòng thành công');
+    navigate("/profile");
   }
   return (
     <div className='detail-page'>
@@ -291,7 +294,7 @@ export default function Detail({ }: Props) {
                           <input
                             id='dateIn'
                             name='dateIn'
-                            value={`${format(range[0].startDate, "yyyy-MM-dd")}`}
+                            value={format(range[0].startDate, "yyyy-MM-dd")}
                             readOnly
                             className="date-in text-center"
                             onClick={() => setOpen(open => !open)}
@@ -302,7 +305,7 @@ export default function Detail({ }: Props) {
                           <input
                             id='dateOut'
                             name='dateOut'
-                            value={`${format(range[0].endDate, "yyyy-MM-dd")} `}
+                            value={format(range[0].endDate, "yyyy-MM-dd")}
                             readOnly
                             className="date-out text-center"
                             onClick={() => setOpen(open => !open)}
@@ -342,15 +345,15 @@ export default function Detail({ }: Props) {
                       <div className="cost-amount d-flex justify-content-between">
                         <div className="cost-date text-decoration-underline">
                           <p>${arrDetail?.giaTien} x {dateDiff
-                            (`${format(range[0].startDate, "MM/dd/yyyy")} `,
-                              `${format(range[0].endDate, "MM/dd/yyyy")} `)} đêm
+                            (format(range[0].startDate, "yyyy-MM-dd"),
+                              format(range[0].endDate, "yyyy-MM-dd"))} đêm
                           </p>
                         </div>
                         <div className="bill">
                           <p>
                             ${arrDetail?.giaTien * dateDiff
-                              (`${format(range[0].startDate, "MM/dd/yyyy")} `,
-                                `${format(range[0].endDate, "MM/dd/yyyy")} `)}
+                              (format(range[0].startDate, "yyyy-MM-dd"),
+                                format(range[0].endDate, "yyyy-MM-dd"))}
                           </p>
                         </div>
                       </div>
@@ -370,8 +373,8 @@ export default function Detail({ }: Props) {
                       <div className="in-total">
                         {arrDetail?.giaTien *
                           dateDiff
-                            (`${format(range[0].startDate, "MM/dd/yyyy")} `,
-                              `${format(range[0].endDate, "MM/dd/yyyy")} `) + 31}
+                            (format(range[0].startDate, "yyyy-MM-dd"),
+                              format(range[0].endDate, "yyyy-MM-dd")) + 31}
                       </div>
                     </div>
                   </div>

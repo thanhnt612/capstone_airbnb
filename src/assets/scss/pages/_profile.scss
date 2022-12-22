@@ -15,7 +15,7 @@
           .verify {
             .identity {
               .check-icon {
-                  font-size: $text-3xl;
+                font-size: $text-3xl;
                 i {
                 }
               }
@@ -42,6 +42,94 @@
         }
       }
       .history {
+        .title {
+          h3 {
+          }
+          p {
+          }
+        }
+        .edit-profile {
+          button {
+            background: $bg-header-light;
+          }
+        }
+
+        .list-title {
+          h4 {
+            @include text($text-3xl, $text-bold, $text-c1-dark);
+          }
+        }
+        .list-choose {
+          .thumbnail {
+            padding: 20px 0;
+            img {
+              object-fit: cover;
+              min-height: 220px;
+            }
+          }
+          .detail {
+            .info {
+              h5 {
+              }
+              p {
+              }
+            }
+            .time {
+              p {
+              }
+            }
+            .view-more {
+              .button {
+                margin-right: 10px;
+                a {
+                  font-size: $text-xl;
+                  border: 1px solid $bg-header-main;
+                  color: $text-c1-main;
+                  background: $bg-header-light;
+                  text-align: center;
+                  position: relative;
+                  transition: all 0.7s;
+                  &::after {
+                    position: absolute;
+                    content: "";
+                    top: 0;
+                    left: 0;
+                    width: 0;
+                    height: 100%;
+                    background: #ff003b;
+                    transition: all 0.7s;
+                  }
+                  &:hover {
+                    color: $text-c1-light;
+                    font-weight: $text-bold;
+                    &::after {
+                      width: 100%;
+                    }
+                  }
+                  span {
+                    position: relative;
+                    z-index: 2;
+                  }
+                }
+              }
+              .cancel {
+                button {
+                  background: $bg-header-main;
+                  color: $text-c1-light;
+                  font-size: $text-xl;
+                  border: 1px solid $bg-header-main;
+                  &:hover {
+                    opacity: 0.8;
+                    font-weight: $text-bold;
+                    color: $text-c1-main;
+                    background: $bg-header-light;
+                    transition: all 0.5s;
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     }
   }

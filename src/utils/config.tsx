@@ -2,6 +2,7 @@ import axios from 'axios';
 import { history } from "../index";
 export const USER_LOGIN = 'userLogin';
 export const USER_PROFILE = "userProfile";
+export const USER_CART = "userCart";
 export const ACCESSTOKEN = 'accessToken';
 
 export const settings = {

@@ -23,6 +23,7 @@ export default function Login({ }: Props) {
       console.log("Đăng nhập: ", values);
       const action = loginApi(values);
       dispatch(action);
+      alert('Đăng nhập thành công');
       navigate("/home");
     }
   });

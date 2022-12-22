@@ -57,7 +57,6 @@ export default userReduder.reducer
 export const getProfileApi = (id: number) => {
     return async (dispatch: DispatchType) => {
         const result = await http.get('api/users/' + id);
-        console.log("Profile: ", result.data.content);
         const action: PayloadAction<UserProfile> = setUserProfileAction(result.data.content);
         dispatch(action);
     }
@@ -66,13 +65,11 @@ export const getProfileApi = (id: number) => {
 export const loginApi = (userLogin: UserLogin) => {
     return async (dispatch: DispatchType) => {
         const result = await http.post('api/auth/signin', userLogin);
-        console.log("Login: ",result.data.content)
+        console.log("Login: ", result.data.content)
         const action: PayloadAction<UserLoginResult> = setUserLoginAction(result.data.content);
         await dispatch(action);
-        //Sau đó lưu thông tin vào localstore và dispatch lại profile
         settings.setStorageJson(USER_LOGIN, result.data.content);
         settings.setStorage(ACCESSTOKEN, result.data.content.token);
-        //dispatch profile
         dispatch(getProfileApi(result.data.content.user.id));
     }
 }

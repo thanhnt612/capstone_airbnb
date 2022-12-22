@@ -1,6 +1,6 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { DispatchType } from '../configStore';
-import { http } from '../../utils/config';
+import { http, settings, USER_CART } from '../../utils/config';
 
 export interface BookingModel {
     id: number;
@@ -8,6 +8,14 @@ export interface BookingModel {
     tinhThanh: string;
     quocGia: string;
     hinhAnh: string;
+}
+export interface ProfileModel {
+    id: number | any;
+    maPhong: number;
+    ngayDen: Date;
+    ngayDi: Date;
+    soLuongKhach: number;
+    maNguoiDung: number;
 }
 
 export interface BookingLocation {
@@ -59,44 +67,62 @@ interface BookingState {
     arrBooking: BookingModel[],
     arrLocation: BookingLocation[],
     arrDetail: BookingDetail | null,
-    arrHistory: BookingLocation[],
-    arrarrDetailHistory: BookingLocation[]
-
+    arrHistory: ProfileModel[],
+    arrDetailHistory: BookingLocation[]
 }
 
 const initialState: BookingState = {
     arrBooking: [],
     arrLocation: [],
     arrDetail: null,
-    arrHistory: [],
-    arrarrDetailHistory: []
+    arrHistory: settings.getStorageJson(USER_CART)
+        ? settings.getStorageJson(USER_CART)
+        : {},
+    arrDetailHistory: [],
 }
 
 const bookingReducer = createSlice({
     name: 'bookingReducer',
     initialState,
     reducers: {
-        setArrAction: (state: BookingState, action: PayloadAction<BookingModel[]>) => {
-            const arrBookingList: BookingModel[] = action.payload;
-            state.arrBooking = arrBookingList;
-        },
-        setLocationAction: (state: BookingState, action: PayloadAction<BookingLocation[]>) => {
-            const arrLocationList: BookingLocation[] = action.payload;
-            state.arrLocation = arrLocationList;
-        },
-        setDetailAction: (state: BookingState, action: PayloadAction<BookingDetail>) => {
-            state.arrDetail = action.payload;
-        },
-        setHistoryAction: (state: BookingState, action: PayloadAction<BookingLocation[]>) => {
-            state.arrHistory = action.payload;
-        },
-        setDetailHistoryAction: (state: BookingState, action: PayloadAction<BookingLocation[]>) => {
-            state.arrarrDetailHistory = action.payload;
-        }
+        setArrAction:
+            (state: BookingState, action: PayloadAction<BookingModel[]>) => {
+                const arrBookingList: BookingModel[] = action.payload;
+                state.arrBooking = arrBookingList;
+            },
+        setLocationAction:
+            (state: BookingState, action: PayloadAction<BookingLocation[]>) => {
+                const arrLocationList: BookingLocation[] = action.payload;
+                state.arrLocation = arrLocationList;
+            },
+        setDetailAction:
+            (state: BookingState, action: PayloadAction<BookingDetail>) => {
+                state.arrDetail = action.payload;
+            },
+        setHistoryAction:
+            (state: BookingState, action: PayloadAction<ProfileModel[]>) => {
+                state.arrHistory = action.payload;
+            },
+        setDetailHistoryAction:
+            (state: BookingState, action: PayloadAction<BookingLocation[]>) => {
+                state.arrDetailHistory = action.payload;
+            },
+        deleteBookingAction:
+            (state: BookingState, action: PayloadAction<BookingDetail>) => {
+                const id = action.payload;
+                state.arrHistory = state.arrHistory.filter((item) => item.id !== id);
+                settings.setStorageJson(USER_CART, state.arrHistory);
+            },
     }
 });
 
-export const { setArrAction, setLocationAction, setDetailAction, setHistoryAction, setDetailHistoryAction } = bookingReducer.actions
+export const {
+    setArrAction,
+    setLocationAction,
+    setDetailAction,
+    setHistoryAction,
+    setDetailHistoryAction,
+    deleteBookingAction } = bookingReducer.actions
 export default bookingReducer.reducer
 
 //--------------------Action Async ---------------------
@@ -140,22 +166,21 @@ export const postBookingApi =
     };
 export const getBookingProfileIdApi = (profileId: number) => {
     return async (dispatch: DispatchType) => {
-        const result: any = await http.get('/api/dat-phong/lay-theo-nguoi-dung/' + profileId);
-        // console.log(result.data.content)
-        let bookingHistory: BookingLocation[] = result.data.content;
-        const action: PayloadAction<BookingLocation[]> = setHistoryAction(bookingHistory);
+        const result: any =
+            await http.get('/api/dat-phong/lay-theo-nguoi-dung/' + profileId);
+        let bookingHistory: ProfileModel[] = result.data.content;
+        const action: PayloadAction<ProfileModel[]> =
+            setHistoryAction(bookingHistory);
         dispatch(action);
-        // dispatch(getBookingHistoryApi(result.data.content))
-        // result.data.content.map((item: any) => {
-        //     console.log(item.maPhong);
-        // })
+        dispatch(getBookingHistoryApi());
     }
 }
-// export const getBookingHistoryApi = (id: any) => {
-//     return async (dispatch: DispatchType) => {
-//         const result: any = await http.get('/api/phong-thue/' + id);
-//         let bookingDetail: BookingLocation[] = result.data.content;
-//         const action: PayloadAction<BookingLocation[]> = setDetailHistoryAction(bookingDetail);
-//         dispatch(action);
-//     }
-// }
+export const getBookingHistoryApi = () => {
+    return async (dispatch: DispatchType) => {
+        const result: any = await http.get('/api/phong-thue/');
+        let bookingDetail: BookingLocation[] = result.data.content;
+        const action: PayloadAction<BookingLocation[]> =
+            setDetailHistoryAction(bookingDetail);
+        dispatch(action);
+    }
+}
