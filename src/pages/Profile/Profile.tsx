@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { DispatchType, RootState } from '../../redux/configStore';
 import { deleteBookingAction, getBookingProfileIdApi } from '../../redux/reducers/bookingReducer';
-import { getProfileApi } from '../../redux/reducers/userReduder';
+import { getProfileApi, updateProfileApi } from '../../redux/reducers/userReduder';
 import { useFormik, FormikProps } from 'formik';
 import * as yup from 'yup';
 type Props = {}
@@ -12,16 +12,11 @@ export type EditProfile = {
     name: string,
     phone: string,
     birthday: string,
-    gender: boolean | undefined
+    gender: any
 }
 export default function Profile({ }: Props) {
     const dispatch: DispatchType = useDispatch();
-    useEffect(() => {
-        const action = getProfileApi(userLogin.user?.id);
-        dispatch(action);
-        const actionAsync = getBookingProfileIdApi(userLogin.user?.id);
-        dispatch(actionAsync)
-    }, []);
+
     const { userLogin } = useSelector((state: RootState) => state.userReduder);
     const { arrHistory } = useSelector((state: RootState) => state.bookingReducer);
     const { arrDetailHistory } = useSelector((state: RootState) => state.bookingReducer);
@@ -43,13 +38,20 @@ export default function Profile({ }: Props) {
             birthday: yup.string().required("Xin mời nhập ngày tháng năm sinh !!!"),
         }),
         onSubmit: (values: EditProfile) => {
-            console.log("Đăng nhập: ", values);
-            // const action = loginApi(values);
-            // dispatch(action);
-            // alert('Đăng nhập thành công');
-            // navigate("/home");
+            if (values.gender === "male") {
+                values.gender = true;
+            } else {
+                values.gender = false;
+            }
+            dispatch(updateProfileApi(userLogin.user.id, values))
         }
     });
+    useEffect(() => {
+        const action = getProfileApi(userLogin.user?.id);
+        dispatch(action);
+        const actionAsync = getBookingProfileIdApi(userLogin.user?.id);
+        dispatch(actionAsync)
+    }, []);
     return (
         <div className='profile-page pt-3'>
             <div className="container">
@@ -102,7 +104,7 @@ export default function Profile({ }: Props) {
                                             <h1 className="modal-title fs-5" id="exampleModalLabel">Chỉnh sửa thông tin</h1>
                                             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" />
                                         </div>
-                                        <form>
+                                        <form onSubmit={frm.handleSubmit}>
                                             <div className="modal-body">
                                                 <div className="form-group mb-3">
                                                     <label htmlFor="email">Email:</label>
@@ -146,7 +148,9 @@ export default function Profile({ }: Props) {
                                                         value="male"
                                                         name="gender"
                                                         checked={
-                                                            (frm.values.gender === true) ? true : undefined
+                                                            (frm.values.gender === true
+                                                                || frm.values.gender === "male")
+                                                                ? true : undefined
                                                         }
                                                         onChange={frm.handleChange}
                                                     />
@@ -157,7 +161,9 @@ export default function Profile({ }: Props) {
                                                         value="female"
                                                         name="gender"
                                                         checked={
-                                                            (frm.values.gender === false) ? true : undefined
+                                                            (frm.values.gender === false
+                                                                || frm.values.gender === "female")
+                                                                ? true : undefined
                                                         }
                                                         onChange={frm.handleChange}
                                                     />

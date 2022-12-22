@@ -24,7 +24,7 @@ export default function HeaderHome({ }: Props) {
             onClick={() => {
               localStorage.removeItem(USER_LOGIN);
               localStorage.removeItem(ACCESSTOKEN);
-              window.location.href = "/";
+              window.location.href = "/user/login";
             }}>
             Đăng xuất
           </button>

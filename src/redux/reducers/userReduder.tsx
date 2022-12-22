@@ -1,5 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { UserLogin } from '../../pages/Login/Login';
+import { EditProfile } from '../../pages/Profile/Profile';
+import { UserRegister } from '../../pages/Register/Register';
 import {
     ACCESSTOKEN,
     http,
@@ -36,7 +38,6 @@ const initialState = {
         ? settings.getStorageJson(USER_PROFILE)
         : {},
 }
-
 const userReduder = createSlice({
     name: 'userReducer',
     initialState,
@@ -54,6 +55,7 @@ export const { setUserLoginAction, setUserProfileAction } = userReduder.actions
 
 export default userReduder.reducer
 
+
 export const getProfileApi = (id: number) => {
     return async (dispatch: DispatchType) => {
         const result = await http.get('api/users/' + id);
@@ -61,11 +63,21 @@ export const getProfileApi = (id: number) => {
         dispatch(action);
     }
 }
-
+export const registerApi = (register: UserRegister) => {
+    return async (dispatch: DispatchType) => {
+        const result = await http.post('/api/auth/signup/', register);
+        console.log('Đăng ký: ', result.data.content);
+        alert("Đăng ký tài khoản thành công");
+        window.location.href = "/user/login";
+    };
+};
 export const loginApi = (userLogin: UserLogin) => {
     return async (dispatch: DispatchType) => {
         const result = await http.post('api/auth/signin', userLogin);
-        console.log("Login: ", result.data.content)
+        if (result.status === 200) {
+            alert("Đăng nhập thành công");
+            window.location.href = "/";
+        }
         const action: PayloadAction<UserLoginResult> = setUserLoginAction(result.data.content);
         await dispatch(action);
         settings.setStorageJson(USER_LOGIN, result.data.content);
@@ -73,3 +85,10 @@ export const loginApi = (userLogin: UserLogin) => {
         dispatch(getProfileApi(result.data.content.user.id));
     }
 }
+export const updateProfileApi = (id: number, update: EditProfile) => {
+    return async (dispatch: DispatchType) => {
+        const result = await http.put('/api/users/' + id, update);
+        alert("Đã lưu thông tin, yêu cầu đăng nhập lại");
+        window.location.href = "/user/login";
+    };
+};

@@ -9,7 +9,6 @@ type Props = {}
 export type UserLogin = { email: string, password: string }
 export default function Login({ }: Props) {
   const dispatch: DispatchType = useDispatch();
-  const navigate = useNavigate()
   const frm: FormikProps<UserLogin> = useFormik<UserLogin>({
     initialValues: {
       email: '',
@@ -23,8 +22,6 @@ export default function Login({ }: Props) {
       console.log("Đăng nhập: ", values);
       const action = loginApi(values);
       dispatch(action);
-      alert('Đăng nhập thành công');
-      navigate("/home");
     }
   });
   return (

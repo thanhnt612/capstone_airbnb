@@ -97,8 +97,8 @@ http.interceptors.request.use((config) => {
 http.interceptors.response.use((response) => {
     return response;
 }, (error) => {
-    console.log(error);
     if (error.response?.status === 400) {
+        alert("Mật khẩu chưa chính xác")
         history.push('/user/login');
     }
     if (error.response?.status === 401 || error.response?.status === 404) {

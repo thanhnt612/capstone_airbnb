@@ -4,6 +4,7 @@ import * as yup from 'yup';
 import { useDispatch } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 import { DispatchType } from '../../redux/configStore'
+import { registerApi } from '../../redux/reducers/userReduder';
 
 type Props = {}
 export type UserRegister = {
@@ -25,7 +26,7 @@ export default function Register({ }: Props) {
       name: '',
       phone: '',
       birthday: '',
-      gender: true
+      gender: ''
     },
     validationSchema: yup.object().shape({
       email: yup
@@ -44,12 +45,12 @@ export default function Register({ }: Props) {
       birthday: yup.string().required("Xin mời nhập ngày tháng năm sinh !!!"),
     }),
     onSubmit: (values: UserRegister) => {
-      if (values.gender === 'true') {
+      if (values.gender === 'male') {
         values.gender = true;
       } else {
         values.gender = false;
       }
-      console.log(values)
+      dispatch(registerApi(values))
     }
   });
   return (
@@ -129,7 +130,7 @@ export default function Register({ }: Props) {
                   <input
                     className="radioButton"
                     type="radio"
-                    value="true"
+                    value="male"
                     name="gender"
                     onChange={frm.handleChange}
                   />
@@ -137,7 +138,7 @@ export default function Register({ }: Props) {
                   <input
                     className="radioButton"
                     type="radio"
-                    value="false"
+                    value="female"
                     name="gender"
                     onChange={frm.handleChange}
                   />
