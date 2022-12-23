@@ -1,79 +1,66 @@
-import React from 'react'
-
+import React, { useRef } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { DispatchType, RootState } from '../../redux/configStore';
+import { getBookingLocationApi } from '../../redux/reducers/bookingReducer';
 
 type Props = {}
 
 export default function Home({ }: Props) {
-
+  const dispatch: DispatchType = useDispatch();
+  const content = useRef(null);
+  const navigate = useNavigate();
+  const { arrBooking } = useSelector((state: RootState) => state.bookingReducer)
+  const onList = (city: number) => {
+    const action = getBookingLocationApi(city);
+    dispatch(action)
+    navigate("/list");
+  }
+  const scrollToSection = (link: any) => {
+    window.scrollTo({
+      top: link.current.offsetTop,
+      behavior: "smooth",
+    });
+  };
   return (
     <div className='home-page'>
       <div className="carousel">
         <div className="introduce container">
-          <h3>Hãy bắt đầu những cuộc phiêu lưu</h3>
-          <h4>Cuộc đời là những chuyến đi.</h4>
-          <button className='btn'>
+          <h3>Hãy bắt đầu những chuyến du lịch</h3>
+          <h4>Tận hưởng cuộc sống</h4>
+          <button className='btn'
+            onClick={() => scrollToSection(content)}>
             Trải nghiệm ngay
           </button>
         </div>
       </div>
-      <div className='content'>
+      <div className='content' ref={content}>
         <div className="container">
           <div className="list mb-5">
             <div className="tittle">
               <h3>Khám phá những điểm đến gần đây</h3>
             </div>
-            <div className="menu pt-5">
-              <div className="city">
-                <div className="row">
-                  <div className="col-3">
-                    <div className="item d-flex">
-                      <div className="thumbnail col-3 pe-3">
-                        <img src="http://picsum.photos/200/200"
-                          className='w-100' alt="" />
-                      </div>
-                      <div className="detail col-9">
-                        <h5>Thành phố Hồ Chí Minh</h5>
-                        <p>15 phút lái xe</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-3">
-                    <div className="item d-flex">
-                      <div className="thumbnail col-3 pe-3">
-                        <img src="http://picsum.photos/200/200"
-                          className='w-100' alt="" />
-                      </div>
-                      <div className="detail col-9">
-                        <h5>Thành phố Hồ Chí Minh</h5>
-                        <p>15 phút lái xe</p>
+            <div className="menu pt-5" ref={content}>
+              <div className="row">
+                {arrBooking.map((location) => {
+                  if (location.id < 9) {
+                    return <div className="list-city col-3 pb-3">
+                      <div className="item d-flex p-3 border border-secondary rounded">
+                        <div className="thumbnail col-4 pe-3">
+                          <img src={location.hinhAnh}
+                            className='w-100' alt="" />
+                        </div>
+                        <div className="detail col-8">
+                          <h5>{location.tinhThanh} , {location.quocGia}</h5>
+                          <p>{location.tenViTri}</p>
+                          <button className="locate" onClick={() => onList(location.id)}>
+                            Danh sách phòng
+                          </button>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div className="col-3">
-                    <div className="item d-flex">
-                      <div className="thumbnail col-3 pe-3">
-                        <img src="http://picsum.photos/200/200"
-                          className='w-100' alt="" />
-                      </div>
-                      <div className="detail col-9">
-                        <h5>Thành phố Hồ Chí Minh</h5>
-                        <p>15 phút lái xe</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-3">
-                    <div className="item d-flex">
-                      <div className="thumbnail col-3 pe-3">
-                        <img src="http://picsum.photos/200/200"
-                          className='w-100' alt="" />
-                      </div>
-                      <div className="detail col-9">
-                        <h5>Thành phố Hồ Chí Minh</h5>
-                        <p>15 phút lái xe</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                  }
+                })}
               </div>
             </div>
           </div>

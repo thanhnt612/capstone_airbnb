@@ -12,7 +12,6 @@ export default function HeaderHome({ }: Props) {
   const dispatch: DispatchType = useDispatch();
   const navigate = useNavigate();
   const { userLogin } = useSelector((state: RootState) => state.userReduder);
-  // console.log(userLogin.user.name)
   const renderLogin = () => {
     if (userLogin.user?.name) {
       return (
@@ -39,7 +38,21 @@ export default function HeaderHome({ }: Props) {
       </>
     );
   };
-  //---------------------------------------------------------------------------
+  const renderUser = () => {
+    if (userLogin.user?.name) {
+      return (
+        <>
+          <img src="http://picsum.photos/20/20" alt=""
+            className='rounded' />
+        </>
+      )
+    }
+    return (
+      <>
+        <i className="user fa-solid fa-user"></i>
+      </>
+    );
+  }
   useEffect(() => {
     const actionAsync = getBookingApi();
     dispatch(actionAsync)
@@ -103,9 +116,9 @@ export default function HeaderHome({ }: Props) {
               <NavLink className="nav-link dropdown-toggle" to="" role="button"
                 data-bs-toggle="dropdown" aria-expanded="false">
                 <i className="bar fa-solid fa-bars"></i>
-                <i className="user fa-solid fa-user"></i>
+                {renderUser()}
               </NavLink>
-              <ul className="dropdown-menu">
+              <ul className="dropdown-menu list-info">
                 {renderLogin()}
                 <li><hr /></li>
                 <li><NavLink className="dropdown-item" to="">Cho thuê chỗ ở qua Airbnb</NavLink></li>

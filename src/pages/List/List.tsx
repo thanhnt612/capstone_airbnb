@@ -13,7 +13,7 @@ export default function List({ }: Props) {
                 <div className="row">
                     <div className="content col-7 mb-3">
                         <div className="tittle">
-                            <p>Hơn {arrLocation.length} chỗ ở - Từ ngày - đến ngày</p>
+                            <p>Hơn {arrLocation.length - 1} chỗ ở đã chọn</p>
                             <h3>Chỗ ở tại khu vực bản đồ đã chọn</h3>
                         </div>
                         {arrLocation.map((location) => {

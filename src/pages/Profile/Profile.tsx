@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState, ChangeEvent } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { DispatchType, RootState } from '../../redux/configStore';
@@ -7,6 +7,7 @@ import { getProfileApi, updateProfileApi } from '../../redux/reducers/userRedude
 import { useFormik, FormikProps } from 'formik';
 import * as yup from 'yup';
 type Props = {}
+
 export type EditProfile = {
     email: string,
     name: string,
@@ -14,13 +15,21 @@ export type EditProfile = {
     birthday: string,
     gender: any
 }
+
 export default function Profile({ }: Props) {
     const dispatch: DispatchType = useDispatch();
 
     const { userLogin } = useSelector((state: RootState) => state.userReduder);
     const { arrHistory } = useSelector((state: RootState) => state.bookingReducer);
     const { arrDetailHistory } = useSelector((state: RootState) => state.bookingReducer);
-    console.log(userLogin.user.gender)
+
+    const [image, setImage] = useState<File | null>(null);
+
+    const onImageChange = (event: ChangeEvent<HTMLInputElement>) => {
+        if (!event.target.files) return
+        setImage(event.target.files[0]);
+    }
+
     const frm: FormikProps<EditProfile> = useFormik<EditProfile>({
         initialValues: {
             email: userLogin.user.email,
@@ -46,12 +55,14 @@ export default function Profile({ }: Props) {
             dispatch(updateProfileApi(userLogin.user.id, values))
         }
     });
+
     useEffect(() => {
         const action = getProfileApi(userLogin.user?.id);
         dispatch(action);
         const actionAsync = getBookingProfileIdApi(userLogin.user?.id);
         dispatch(actionAsync)
     }, []);
+    
     return (
         <div className='profile-page pt-3'>
             <div className="container">
@@ -59,11 +70,27 @@ export default function Profile({ }: Props) {
                     <div className="info col-3">
                         <div className="account border rounded p-4">
                             <div className="avatar text-center">
-                                <img src="http://picsum.photos/200/200"
-                                    className='w-50 rounded-circle'
-                                    alt="" />
+                                <img src={image === null ? "http://picsum.photos/200/200" : URL.createObjectURL(image)} alt="preview"
+                                    className='rounded-circle' />
                                 <div className="update-avatar bg-white pt-3">
-                                    <button className='border-0 text-decoration-underline'>Cập nhật ảnh</button>
+                                    <button className='border-0 text-decoration-underline'
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#addAvatar">Cập nhật ảnh</button>
+                                    <div className="modal fade " id="addAvatar" tabIndex={-1} aria-labelledby="exampleModalLabel" aria-hidden="true" style={{ display: 'none' }}>
+                                        <div className="modal-dialog modal-dialog-centered">
+                                            <div className="modal-content">
+                                                <div className="modal-header">
+                                                    <h1 className="modal-title fs-5" id="exampleModalLabel">Cập nhật avatar</h1>
+                                                </div>
+                                                <div className="modal-body">
+                                                    <input type="file" onChange={onImageChange} className="filetype" />
+                                                </div>
+                                                <div className="modal-footer">
+                                                    <button type="button" className="btn bg-danger text-light" data-bs-dismiss="modal">Close</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div className='verify pt-2'>
