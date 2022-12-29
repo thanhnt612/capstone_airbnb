@@ -8,12 +8,12 @@ import {
   Routes,
 } from "react-router-dom";
 import HomeTemplate from './templates/HomeTemplate';
-import Home from './pages/Home/Home';
 import Detail from './pages/Detail/Detail';
 import Login from './pages/Login/Login';
 import Register from './pages/Register/Register';
 import Profile from './pages/Profile/Profile'
 import Admin from './pages/Admin/Admin'
+import Home from './pages/Home/Home';
 
 import { Provider } from 'react-redux'
 import { store } from './redux/configStore';
