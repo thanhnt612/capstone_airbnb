@@ -70,7 +70,6 @@ export const getProfileApi = (id: number) => {
 export const registerApi = (register: UserRegister) => {
     return async (dispatch: DispatchType) => {
         const result = await http.post('/api/auth/signup/', register);
-        console.log('Thông tin đăng ký: ', result.data.content);
     };
 };
 export const loginApi = (userLogin: UserLogin) => {
@@ -109,7 +108,7 @@ export const updateProfileApi = (id: number, update: EditProfile) => {
                 draggable: true,
                 progress: undefined,
                 theme: "colored",
-                onClose: () => window.location.href = "/user/login"
+                onClose: () => history.push("/user/login")
             });
         }
     };
