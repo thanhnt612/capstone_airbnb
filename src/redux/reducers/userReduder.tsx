@@ -108,7 +108,7 @@ export const updateProfileApi = (id: number, update: EditProfile) => {
                 draggable: true,
                 progress: undefined,
                 theme: "colored",
-                onClose: () => history.push("/user/login")
+                onClose: () => window.location.href = "/user/login"
             });
         }
     };
