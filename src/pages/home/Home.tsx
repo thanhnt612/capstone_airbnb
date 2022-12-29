@@ -6,7 +6,6 @@ import { getBookingLocationApi } from '../../redux/reducers/bookingReducer';
 
 type Props = {}
 
-// eslint-disable-next-line no-empty-pattern
 export default function Home({ }: Props) {
   const dispatch: DispatchType = useDispatch();
   const content = useRef(null);
@@ -44,14 +43,14 @@ export default function Home({ }: Props) {
             </div>
             <div className="menu pt-5" ref={content}>
               <div className="row">
-                {arrBooking.map((location:any, index:number) => {
+                {arrBooking.map((location, index) => {
                   if (location.id < 9) {
                     return <div className="list-city col-xl-3 col-lg-4 col-md-6 pb-3" key={index}>
                       <div className="item d-flex p-3 bg-light border border-2 
                       border-success border-opacity-25 rounded">
                         <div className="thumbnail col-4 pe-3">
                           <img src={location.hinhAnh}
-                            className='w-100' alt="..." />
+                            className='w-100' alt="" />
                         </div>
                         <div className="detail col-8">
                           <h5>{location.tinhThanh} , {location.quocGia}</h5>

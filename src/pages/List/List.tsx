@@ -7,7 +7,6 @@ type Props = {}
 
 export default function List({ }: Props) {
     const { arrLocation } = useSelector((state: RootState) => state.bookingReducer)
-    console.log(arrLocation);
     return (
         <div className='list-page'>
             <div className="container">

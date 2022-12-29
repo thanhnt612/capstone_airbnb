@@ -22,13 +22,6 @@
           flex-direction: column;
           justify-content: space-between;
           .info {
-            h5 {
-              @include text($text-xl, $text-bold, $text-c1-dark);
-
-            }
-            p {
-              @include text($text-base, $text-light, $text-c1-dark);
-            }
           }
           .view-more {
             display: flex;
