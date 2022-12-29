@@ -1,4 +1,5 @@
 .profile-page {
+  background-image: linear-gradient(174.2deg, #fff4e4 7.1%, #f0f6ee 67.4%);
   .container {
     .row {
       .info {
@@ -16,11 +17,6 @@
           }
           .verify {
             .identity {
-              .check-icon {
-                font-size: $text-3xl;
-                i {
-                }
-              }
               h5 {
                 @include text($text-2xl, $text-bold, $text-c1-dark);
               }

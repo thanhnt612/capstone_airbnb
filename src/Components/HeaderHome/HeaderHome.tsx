@@ -3,7 +3,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux'
 import { DispatchType, RootState } from '../../redux/configStore'
 import { getBookingApi, getBookingLocationApi } from '../../redux/reducers/bookingReducer'
-import { ACCESSTOKEN, USER_LOGIN } from '../../utils/config';
+import { ACCESSTOKEN, USER_CART, USER_LOGIN } from '../../utils/config';
 type Props = {}
 
 export default function HeaderHome({ }: Props) {
@@ -22,6 +22,7 @@ export default function HeaderHome({ }: Props) {
           <li><button className="dropdown-item"
             onClick={() => {
               localStorage.removeItem(USER_LOGIN);
+              localStorage.removeItem(USER_CART);
               localStorage.removeItem(ACCESSTOKEN);
               window.location.href = "/user/login";
             }}>
@@ -131,7 +132,7 @@ export default function HeaderHome({ }: Props) {
           </div>
         </div>
       </div>
-      <div className="header-search">
+      <div className="header-search container">
         <form onSubmit={handleSubmit}>
           <div className="form-fill border row">
             <div className="location col-3">

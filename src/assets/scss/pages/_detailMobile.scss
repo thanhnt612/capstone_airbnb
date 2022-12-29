@@ -1,19 +1,28 @@
-.detail-page {
-  background-image: linear-gradient(174.2deg, #fff4e4 7.1%, #f0f6ee 67.4%);
+.detail-page-mobile {
   .container {
+    h3 {
+      @include responsive("xs") {
+        font-size: $text-2xl;
+      }
+      @include responsive("mdd") {
+        font-size: $text-2xl;
+      }
+    }
     .title {
       display: flex;
       justify-content: space-between;
       flex-wrap: wrap;
       .info {
-        h3 {
-        }
         ul {
           display: flex;
+          flex-direction: column;
           list-style: none;
           padding-left: 0;
           li {
             padding-right: 15px;
+            @include responsive("xs") {
+              font-size: $text-base;
+            }
           }
           .underline {
             text-decoration: underline;
@@ -28,6 +37,9 @@
           padding-left: 0;
           li {
             padding-right: 15px;
+            @include responsive("xs") {
+              font-size: $text-base;
+            }
           }
           .underline {
             text-decoration: underline;
@@ -48,17 +60,16 @@
       .content {
         .title-left {
           h3 {
-            white-space: nowrap;
-            @include responsive("md") {
-              font-size: $text-2xl;
+            @include responsive("xs") {
+              font-size: $text-xl;
+            }
+            @include responsive("mdd") {
+              font-size: $text-xl;
             }
           }
           p {
-            @include responsive("md") {
+            @include responsive("xs") {
               font-size: $text-base;
-            }
-            @include responsive("lg") {
-              font-size: $text-xl;
             }
           }
         }
@@ -68,32 +79,39 @@
           .row {
             .item {
               h4 {
-                @include responsive("md") {
-                  font-size: $text-2xl;
+                @include responsive("xs") {
+                  font-size: $text-xl;
                 }
               }
               p {
-                @include responsive("md") {
+                @include responsive("xs") {
                   font-size: $text-base;
-                }
-                @include responsive("lg") {
-                  font-size: $text-xl;
                 }
               }
             }
           }
         }
         .authority {
+          img {
+          }
           p {
-            @include responsive("md") {
+            @include responsive("xs") {
               font-size: $text-base;
             }
-            @include responsive("lg") {
-              font-size: $text-xl;
-            }
+          }
+          a {
+            @extend p;
           }
         }
         .facility {
+          h4 {
+            @include responsive("xs") {
+              font-size: $text-xl;
+            }
+            @include responsive("mdd") {
+              font-size: $text-2xl;
+            }
+          }
           .row {
             .item {
             }
@@ -103,11 +121,15 @@
               padding: 10px 15px;
               border: 1px solid;
               font-weight: $text-bold;
+              @include responsive("xs") {
+                font-size: $text-xl;
+              }
             }
           }
         }
       }
       .payment {
+        padding: 30px 0;
         form {
           position: -webkit-sticky;
           position: sticky;
@@ -135,7 +157,6 @@
                     input {
                       width: 100%;
                       padding: 10px;
-                      margin-bottom: 15px;
                       border-radius: 5px;
                       border: 1px solid #b0b0b0;
                       outline: none;
@@ -153,10 +174,18 @@
                   border-radius: 5px;
                   position: absolute;
                   left: 0;
-                  transform: translateX(-70%);
                   top: 110px;
                   border: 1px solid #ccc;
                   z-index: 999;
+                  @include responsive("xs") {
+                    transform: translateX(-40%);
+                  }
+                  @include responsive("mdd") {
+                    transform: translateX(6%);
+                  }
+                  .rdrDefinedRangesWrapper {
+                    display: none;
+                  }
                 }
               }
               .add-guest {

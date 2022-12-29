@@ -5,7 +5,9 @@ import { useDispatch } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 import { DispatchType } from '../../redux/configStore'
 import { registerApi } from '../../redux/reducers/userReduder';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { history } from '../../index';
 type Props = {}
 export type UserRegister = {
   email: string,
@@ -18,6 +20,19 @@ export type UserRegister = {
 }
 export default function Register({ }: Props) {
   const dispatch: DispatchType = useDispatch();
+  const notify = () => {
+    toast.success('Đăng ký tài khoản thành công!!!', {
+      position: "top-center",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+      onClose: () => history.push('/user/login')
+    });
+  };
   const frm: FormikProps<UserRegister> = useFormik<UserRegister>({
     initialValues: {
       email: '',
@@ -145,7 +160,18 @@ export default function Register({ }: Props) {
                   <label htmlFor="">Female</label>
                 </div>
                 <div className="button">
-                  <button type="submit" className="btn-register" >Đăng Ký</button>
+                  <button type="submit" className="btn-register" onClick={notify}>Đăng Ký</button>
+                  <ToastContainer
+                    position="top-center"
+                    autoClose={2000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                    theme="colored" />
                   <span>Bạn đã có tài khoản?</span><NavLink to='/user/login'>Đăng nhập ở đây</NavLink>
                 </div>
               </form>

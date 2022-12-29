@@ -10,6 +10,10 @@ import {
     USER_PROFILE
 } from "../../utils/config";
 import { DispatchType } from '../configStore';
+import { getBookingProfileIdApi } from './bookingReducer';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { history } from '../../index';
 export interface UserProfile {
     id: number;
     name: string;
@@ -66,29 +70,47 @@ export const getProfileApi = (id: number) => {
 export const registerApi = (register: UserRegister) => {
     return async (dispatch: DispatchType) => {
         const result = await http.post('/api/auth/signup/', register);
-        console.log('Đăng ký: ', result.data.content);
-        alert("Đăng ký tài khoản thành công");
-        window.location.href = "/user/login";
+        console.log('Thông tin đăng ký: ', result.data.content);
     };
 };
 export const loginApi = (userLogin: UserLogin) => {
     return async (dispatch: DispatchType) => {
         const result = await http.post('api/auth/signin', userLogin);
+        dispatch(getBookingProfileIdApi(result.data.content.user.id));
         if (result.status === 200) {
-            alert("Đăng nhập thành công");
-            window.location.href = "/";
+            toast.success('Đăng nhập thành công !!!', {
+                position: "top-center",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+                onClose: () => history.push('/home')
+            });
         }
         const action: PayloadAction<UserLoginResult> = setUserLoginAction(result.data.content);
         await dispatch(action);
         settings.setStorageJson(USER_LOGIN, result.data.content);
         settings.setStorage(ACCESSTOKEN, result.data.content.token);
-        dispatch(getProfileApi(result.data.content.user.id));
     }
 }
 export const updateProfileApi = (id: number, update: EditProfile) => {
     return async (dispatch: DispatchType) => {
         const result = await http.put('/api/users/' + id, update);
-        alert("Đã lưu thông tin, yêu cầu đăng nhập lại");
-        window.location.href = "/user/login";
+        if (result.status === 200) {
+            toast.success('Cập nhật thành công, xin hãy đăng nhập lại !!!', {
+                position: "top-center",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+                onClose: () => window.location.href = "/user/login"
+            });
+        }
     };
 };

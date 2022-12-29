@@ -1,8 +1,11 @@
 import axios from 'axios';
 import { history } from "../index";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 export const USER_LOGIN = 'userLogin';
 export const USER_PROFILE = "userProfile";
 export const USER_CART = "userCart";
+export const USER_DETAIL = "userDetail";
 export const ACCESSTOKEN = 'accessToken';
 
 export const settings = {
@@ -98,8 +101,16 @@ http.interceptors.response.use((response) => {
     return response;
 }, (error) => {
     if (error.response?.status === 400) {
-        alert("Mật khẩu chưa chính xác")
-        history.push('/user/login');
+        toast.error('Đăng nhập thất bại, mật khẩu chưa chính xác!!!', {
+            position: "top-center",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+        });
     }
     if (error.response?.status === 401 || error.response?.status === 404) {
         history.push('/');

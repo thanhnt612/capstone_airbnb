@@ -1,0 +1,69 @@
+.footer-mobile {
+  background-color: rgb(247, 247, 247) !important;
+  border-top: 1px solid rgb(221, 221, 221) !important;
+  .list-footer {
+    padding: 20px;
+    display: flex;
+    .footer-1 {
+      p {
+        font-weight: $text-bold;
+      }
+      ul {
+        list-style: none;
+        padding-left: 0;
+        li {
+          padding-bottom: 10px;
+          a {
+            font-size: $text-base;
+            text-decoration: none;
+            color: $text-c1-footer;
+            &:hover {
+              text-decoration: underline;
+              transition: 666s;
+            }
+          }
+        }
+      }
+    }
+    .footer-2 {
+      @extend .footer-1;
+    }
+    .footer-3 {
+      @extend .footer-1;
+    }
+    .footer-4 {
+      @extend .footer-1;
+    }
+  }
+  .license {
+    p {
+      margin-bottom: 0;
+      margin-right: 5px;
+      font-size: $text-xl;
+    }
+  }
+  .list-license {
+    ul {
+      display: flex;
+      list-style: inside;
+      margin-bottom: 0;
+      padding-left: 0;
+      li {
+        margin-right: 10px;
+        a {
+          text-decoration: none;
+          font-size: $text-base;
+          line-height: 18px;
+          color: $text-c1-footer;
+          @include responsive("xs") {
+            font-size: $text-xs;
+          }
+          &:hover {
+            text-decoration: underline;
+            transition: 666s;
+          }
+        }
+      }
+    }
+  }
+}

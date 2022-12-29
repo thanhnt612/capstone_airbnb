@@ -1,0 +1,201 @@
+.profile-page-mobile {
+  background-image: linear-gradient(174.2deg, #fff4e4 7.1%, #f0f6ee 67.4%);
+  .container {
+    .row {
+      .info {
+        .account {
+          .avatar {
+            img {
+              width: 100px;
+              min-height: 100px;
+            }
+            .update-avatar {
+              button {
+                background: $bg-header-light;
+              }
+            }
+          }
+          .verify {
+            .identity {
+              .check-icon {
+              }
+              h5 {
+                @include responsive("xs") {
+                  @include text($text-xl, $text-bold, $text-c1-dark);
+                }
+                @include responsive("mdd") {
+                  @include text($text-2xl, $text-bold, $text-c1-dark);
+                }
+              }
+              p {
+                @include responsive("xs") {
+                  @include text($text-base, $text-light, $text-c1-dark);
+                }
+                @include responsive("mdd") {
+                  @include text($text-xl, $text-light, $text-c1-dark);
+                }
+              }
+            }
+            .button {
+              .btn {
+                @include responsive("xs") {
+                  @include text($text-base, $text-bold, $text-c1-dark);
+                }
+                @include responsive("mdd") {
+                  @include text($text-xl, $text-bold, $text-c1-dark);
+                }
+              }
+            }
+            .check-profile {
+              p {
+                @include responsive("xs") {
+                  @include text($text-xl, $text-bold, $text-c1-dark);
+                }
+                @include responsive("mdd") {
+                  @include text($text-2xl, $text-bold, $text-c1-dark);
+                }
+              }
+              .confirm {
+                @include responsive("xs") {
+                  @include text($text-base, $text-light, $text-c1-dark);
+                }
+                @include responsive("mdd") {
+                  @include text($text-xl, $text-light, $text-c1-dark);
+                }
+              }
+            }
+          }
+        }
+      }
+      .history {
+        .title {
+          h3 {
+          }
+          p {
+            @include responsive("xs") {
+              @include text($text-base, $text-regular, $text-c1-dark);
+            }
+            @include responsive("mdd") {
+              @include text($text-xl, $text-regular, $text-c1-dark);
+            }
+          }
+        }
+        .edit-profile {
+          button {
+            background: $bg-header-light;
+          }
+        }
+
+        .list-title {
+          h4 {
+            @include responsive("xs") {
+              @include text($text-2xl, $text-bold, $text-c1-dark);
+            }
+            @include responsive("mdd") {
+              @include text($text-3xl, $text-bold, $text-c1-dark);
+            }
+          }
+        }
+        .list-choose {
+          .thumbnail {
+            padding: 20px 0;
+            img {
+              object-fit: cover;
+              min-height: 100px;
+            }
+          }
+          .detail {
+            .info {
+              h5 {
+                @include responsive("xs") {
+                  @include text($text-base, $text-bold, $text-c1-dark);
+                }
+                @include responsive("mdd") {
+                  @include text($text-xl, $text-bold, $text-c1-dark);
+                }
+              }
+              p {
+                margin-bottom: 0;
+                @include responsive("xs") {
+                  @include text($text-xs, $text-regular, $text-c1-dark);
+                }
+                @include responsive("mdd") {
+                  @include text($text-base, $text-regular, $text-c1-dark);
+                }
+              }
+            }
+            .time {
+              p {
+                margin-bottom: 0;
+                @include responsive("xs") {
+                  @include text($text-xs, $text-regular, $text-c1-dark);
+                }
+                @include responsive("mdd") {
+                  @include text($text-base, $text-regular, $text-c1-dark);
+                }
+              }
+            }
+            .view-more {
+              .button {
+                padding-top: 10px;
+                a {
+                  border: 1px solid $bg-header-main;
+                  background: $bg-header-light;
+                  text-align: center;
+                  position: relative;
+                  transition: all 0.7s;
+                  &::after {
+                    position: absolute;
+                    content: "";
+                    top: 0;
+                    left: 0;
+                    width: 0;
+                    height: 100%;
+                    background: #ff003b;
+                    transition: all 0.7s;
+                  }
+                  &:hover {
+                    color: $text-c1-light;
+                    font-weight: $text-bold;
+                    &::after {
+                      width: 100%;
+                    }
+                  }
+                  span {
+                    position: relative;
+                    z-index: 2;
+                    @include responsive("xs") {
+                      @include text($text-xs, $text-regular, $text-c1-main);
+                    }
+                    @include responsive("mdd") {
+                      @include text($text-base, $text-regular, $text-c1-main);
+                    }
+                  }
+                }
+              }
+              .cancel {
+                button {
+                  background: $bg-header-main;
+                  border: 1px solid $bg-header-main;
+                  &:hover {
+                    opacity: 0.8;
+                    font-weight: $text-bold;
+                    color: $text-c1-main;
+                    background: $bg-header-light;
+                    transition: all 0.5s;
+                  }
+                  @include responsive("xs") {
+                    @include text($text-xs, $text-regular, $text-c1-light);
+                  }
+                  @include responsive("mdd") {
+                    @include text($text-base, $text-regular, $text-c1-light);
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

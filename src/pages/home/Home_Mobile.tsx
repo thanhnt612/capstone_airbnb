@@ -24,7 +24,7 @@ export default function Home({ }: Props) {
     });
   };
   return (
-    <div className='home-page'>
+    <div className='home-page-mobile'>
       <div className="carousel">
         <div className="introduce container">
           <h3>Hãy bắt đầu những chuyến du lịch</h3>
@@ -43,10 +43,10 @@ export default function Home({ }: Props) {
             </div>
             <div className="menu pt-5" ref={content}>
               <div className="row">
-                {arrBooking.map((location, index) => {
+                {arrBooking.map((location) => {
                   if (location.id < 9) {
-                    return <div className="list-city col-xl-3 col-lg-4 col-md-6 pb-3" key={index}>
-                      <div className="item d-flex p-3 bg-light border border-2 
+                    return <div className="list-city col-12 col-md-6 pb-3">
+                      <div className="item d-flex p-3 border border-2 
                       border-success border-opacity-25 rounded">
                         <div className="thumbnail col-4 pe-3">
                           <img src={location.hinhAnh}
@@ -71,25 +71,25 @@ export default function Home({ }: Props) {
               <h3>Ở bất cứ đâu</h3>
             </div>
             <div className="row">
-              <div className="item col-lg-3 col-md-6">
+              <div className="item col-12 col-md-6">
                 <div className="thumbnail">
                   <img src="/img/home/home.png" className='w-100' alt="" />
                 </div>
                 <p>Toàn bộ nhà</p>
               </div>
-              <div className="item col-lg-3 col-md-6">
+              <div className="item col-12 col-md-6">
                 <div className="thumbnail">
                   <img src="/img/home/special.jpg" className='w-100 ' alt="" />
                 </div>
                 <p>Chỗ ở độc đáo</p>
               </div>
-              <div className="item col-lg-3 col-md-6">
+              <div className="item col-12 col-md-6">
                 <div className="thumbnail">
                   <img src="/img/home/farm.jpg" className='w-100' alt="" />
                 </div>
                 <p>Trang trại và thiên nhiên</p>
               </div>
-              <div className="item col-lg-3 col-md-6">
+              <div className="item col-12 col-md-6">
                 <div className="thumbnail">
                   <img src="/img/home/dog.png" className='w-100' alt="" />
                 </div>

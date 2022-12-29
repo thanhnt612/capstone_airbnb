@@ -7,8 +7,8 @@ export default function Footerhome({ }: Props) {
   return (
     <div className='footer'>
       <div className="container">
-        <div className="list-footer">
-          <div className="footer-1 col-3">
+        <div className="list-footer row">
+          <div className="footer-1 col-lg-3 col-md-6">
             <p>Hỗ trợ</p>
             <ul>
               <li>
@@ -43,7 +43,7 @@ export default function Footerhome({ }: Props) {
               </li>
             </ul>
           </div>
-          <div className="footer-2 col-3">
+          <div className="footer-2 col-lg-3 col-md-6">
             <p>Cộng đồng</p>
             <ul>
               <li>
@@ -58,7 +58,7 @@ export default function Footerhome({ }: Props) {
               </li>
             </ul>
           </div>
-          <div className="footer-3 col-3">
+          <div className="footer-3 col-lg-3 col-md-6">
             <p>Đón tiếp khách</p>
             <ul>
               <li>
@@ -89,7 +89,7 @@ export default function Footerhome({ }: Props) {
               </li>
             </ul>
           </div>
-          <div className="footer-4 col-3">
+          <div className="footer-4 col-lg-3 col-md-6">
             <p>Airbnb</p>
             <ul>
               <li>

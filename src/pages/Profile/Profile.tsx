@@ -3,9 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { DispatchType, RootState } from '../../redux/configStore';
 import { deleteBookingAction, getBookingProfileIdApi } from '../../redux/reducers/bookingReducer';
-import { getProfileApi, updateProfileApi } from '../../redux/reducers/userReduder';
+import { updateProfileApi } from '../../redux/reducers/userReduder';
 import { useFormik, FormikProps } from 'formik';
 import * as yup from 'yup';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 type Props = {}
 
 export type EditProfile = {
@@ -18,11 +20,9 @@ export type EditProfile = {
 
 export default function Profile({ }: Props) {
     const dispatch: DispatchType = useDispatch();
-
     const { userLogin } = useSelector((state: RootState) => state.userReduder);
     const { arrHistory } = useSelector((state: RootState) => state.bookingReducer);
     const { arrDetailHistory } = useSelector((state: RootState) => state.bookingReducer);
-
     const [image, setImage] = useState<File | null>(null);
 
     const onImageChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -57,18 +57,16 @@ export default function Profile({ }: Props) {
     });
 
     useEffect(() => {
-        const action = getProfileApi(userLogin.user?.id);
-        dispatch(action);
-        const actionAsync = getBookingProfileIdApi(userLogin.user?.id);
+        const actionAsync = getBookingProfileIdApi(userLogin.user.id);
         dispatch(actionAsync)
     }, []);
-    
+
     return (
         <div className='profile-page pt-3'>
             <div className="container">
                 <div className="row">
-                    <div className="info col-3">
-                        <div className="account border rounded p-4">
+                    <div className="info col-md-12 col-lg-3">
+                        <div className="account bg-light border rounded p-4">
                             <div className="avatar text-center">
                                 <img src={image === null ? "http://picsum.photos/200/200" : URL.createObjectURL(image)} alt="preview"
                                     className='rounded-circle' />
@@ -93,12 +91,10 @@ export default function Profile({ }: Props) {
                                     </div>
                                 </div>
                             </div>
+                            <hr />
                             <div className='verify pt-2'>
                                 <div className="identity">
-                                    <p className='check-icon'>
-                                        <i className="fa-regular fa-square-check"></i>
-                                    </p>
-                                    <h5>Xác minh danh tính</h5>
+                                    <h5>Xác minh danh tính <i className="fa-regular fa-square-check"></i></h5>
                                     <p>Xác minh danh tính của bạn với huy hiệu xác minh danh tính</p>
                                 </div>
                                 <div className="button">
@@ -114,8 +110,8 @@ export default function Profile({ }: Props) {
                             </div>
                         </div>
                     </div>
-                    <div className="history col-9 mb-3">
-                        <div className="title">
+                    <div className="history col-md-12 col-lg-9 mb-3">
+                        <div className="title pt-3">
                             <h3>Xin chào, tôi là {userLogin.user.name}</h3>
                             <p>Bắt đầu tham gia vào 2022</p>
                         </div>
@@ -160,7 +156,7 @@ export default function Profile({ }: Props) {
                                                 </div>
                                                 <div className="form-group mb-3">
                                                     <label htmlFor="birthday">Ngày sinh:</label>
-                                                    <input name="birthday" id="birthday"
+                                                    <input name="birthday" id="birthday" type="date"
                                                         value={frm.values.birthday}
                                                         className="form-control"
                                                         onChange={frm.handleChange}
@@ -200,6 +196,17 @@ export default function Profile({ }: Props) {
                                             <div className="modal-footer">
                                                 <button type="button" className="btn border-dark " data-bs-dismiss="modal">Hủy</button>
                                                 <button type="submit" className="btn border-dark">Cập nhật</button>
+                                                <ToastContainer
+                                                    position="top-center"
+                                                    autoClose={2000}
+                                                    hideProgressBar={false}
+                                                    newestOnTop={false}
+                                                    closeOnClick
+                                                    rtl={false}
+                                                    pauseOnFocusLoss
+                                                    draggable
+                                                    pauseOnHover
+                                                    theme="colored" />
                                             </div>
                                         </form>
                                     </div>
@@ -213,8 +220,9 @@ export default function Profile({ }: Props) {
                             return <div key={item.maPhong}>
                                 {arrDetailHistory.map((prod: any) => {
                                     if (item.maPhong === prod.id) {
-                                        return <div className="list-choose d-flex py-3 border-top" key={item.maPhong}>
-                                            <div className="thumbnail col-4 me-3">
+                                        return <div className="list-choose d-flex py-3 bg-light border border-2 border-success 
+                                        border-opacity-25 rounded mb-4" key={item.maPhong}>
+                                            <div className="thumbnail col-4 p-4">
                                                 <img src={prod.hinhAnh}
                                                     className='w-100' alt="" />
                                             </div>

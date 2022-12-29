@@ -1,6 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { DispatchType } from '../configStore';
-import { http, settings, USER_CART } from '../../utils/config';
+import { ACCESSTOKEN, http, settings, USER_CART } from '../../utils/config';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { history } from '../../index';
 
 export interface BookingModel {
     id: number;
@@ -65,6 +68,7 @@ export interface BookingDetail {
 
 interface BookingState {
     arrBooking: BookingModel[],
+    arrBookingId: BookingModel | null,
     arrLocation: BookingLocation[],
     arrDetail: BookingDetail | null,
     arrHistory: ProfileModel[],
@@ -73,6 +77,7 @@ interface BookingState {
 
 const initialState: BookingState = {
     arrBooking: [],
+    arrBookingId: null,
     arrLocation: [],
     arrDetail: null,
     arrHistory: settings.getStorageJson(USER_CART)
@@ -89,6 +94,11 @@ const bookingReducer = createSlice({
             (state: BookingState, action: PayloadAction<BookingModel[]>) => {
                 const arrBookingList: BookingModel[] = action.payload;
                 state.arrBooking = arrBookingList;
+            },
+        setArrIdAction:
+            (state: BookingState, action: PayloadAction<BookingModel>) => {
+                const arrBookingList: BookingModel = action.payload;
+                state.arrBookingId = arrBookingList;
             },
         setLocationAction:
             (state: BookingState, action: PayloadAction<BookingLocation[]>) => {
@@ -118,6 +128,7 @@ const bookingReducer = createSlice({
 
 export const {
     setArrAction,
+    setArrIdAction,
     setLocationAction,
     setDetailAction,
     setHistoryAction,
@@ -131,6 +142,14 @@ export const getBookingApi = () => {
         const result: any = await http.get('api/vi-tri');
         let arrBooking: BookingModel[] = result.data.content;
         const action: PayloadAction<BookingModel[]> = setArrAction(arrBooking);
+        dispatch(action)
+    }
+}
+export const getBookingIdApi = (id: number) => {
+    return async (dispatch: DispatchType) => {
+        const result: any = await http.get('api/vi-tri/' + id);
+        let arrBookingId: BookingModel = result.data.content;
+        const action: PayloadAction<BookingModel> = setArrIdAction(arrBookingId);
         dispatch(action)
     }
 }
@@ -161,7 +180,19 @@ export const postBookingApi =
                 soLuongKhach: guest,
                 maNguoiDung: profileId
             });
-            console.log("Lịch sử đặt phòng: ", result);
+            if (result.status === 201) {
+                toast.success('Đặt phòng thành công !!!', {
+                    position: "top-center",
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "colored",
+                    onClose: () => history.push('/profile')
+                });
+            }
         };
     };
 export const getBookingProfileIdApi = (profileId: number) => {
@@ -173,6 +204,8 @@ export const getBookingProfileIdApi = (profileId: number) => {
             setHistoryAction(bookingHistory);
         dispatch(action);
         dispatch(getBookingHistoryApi());
+        settings.setStorageJson(USER_CART, result.data.content);
+        settings.setStorage(ACCESSTOKEN, result.data.content.token);
     }
 }
 export const getBookingHistoryApi = () => {

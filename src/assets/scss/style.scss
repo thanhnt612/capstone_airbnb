@@ -6,15 +6,21 @@
 /*------------------Component--------------------*/
 @import "./components/HeaderHome";
 @import "./components/FooterHome";
+@import "./components/HeaderHomeMobile";
+@import "./components/FooterHomeMobile";
 
 /*-----------------Templates---------------------*/
-@import "./templates//HomeTemplate";
+@import "./templates/HomeTemplate";
 @import "./templates/UserTemplate";
 
 /*------------------Pages--------------------*/
 @import "./pages/detail";
+@import "./pages/detailMobile";
 @import "./pages/home";
+@import "./pages/homeMobile";
 @import "./pages/login";
 @import "./pages/profile";
+@import "./pages/profileMobile";
 @import "./pages/register";
 @import "./pages/list";
+@import "./pages/listMobile";

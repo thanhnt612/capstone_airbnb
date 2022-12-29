@@ -1,13 +1,39 @@
 @mixin text($fz, $fw, $c) {
-    font-size: $fz;
-    font-weight: $fw;
-    color: $c;
+  font-size: $fz;
+  font-weight: $fw;
+  color: $c;
 }
 
 @mixin button($fz, $fw, $c, $bg, $pd) {
-    @include text($fz, $fw, $c);
-    background: $bg;
-    padding: $pd;
-    cursor: pointer;
+  @include text($fz, $fw, $c);
+  background: $bg;
+  padding: $pd;
+  cursor: pointer;
 }
-
+@mixin responsive($breakpoint) {
+  @if $breakpoint == "xs" {
+    @media (min-width: 375px) {
+      @content;
+    }
+  }
+  @if $breakpoint == "mdd" {
+    @media (min-width: 414px) {
+      @content;
+    }
+  }
+  @if $breakpoint == "md" {
+    @media (min-width: 768px) {
+      @content;
+    }
+  }
+  @if $breakpoint == "lg" {
+    @media (min-width: 900px) {
+      @content;
+    }
+  }
+  @if $breakpoint == "xl" {
+    @media (min-width: 1200px) {
+      @content;
+    }
+  }
+}
