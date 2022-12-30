@@ -24,12 +24,19 @@ export default function Profile({ }: Props) {
     const { arrHistory } = useSelector((state: RootState) => state.bookingReducer);
     const { arrDetailHistory } = useSelector((state: RootState) => state.bookingReducer);
     const [image, setImage] = useState<File | null>(null);
+    if (Object.keys(userLogin).length === 0) {
+        window.location.href = "/user/login";
+    }
 
     const onImageChange = (event: ChangeEvent<HTMLInputElement>) => {
         if (!event.target.files) return
         setImage(event.target.files[0]);
     }
 
+    useEffect(() => {
+        const actionAsync = getBookingProfileIdApi(userLogin.user.id);
+        dispatch(actionAsync)
+    }, []);
     const frm: FormikProps<EditProfile> = useFormik<EditProfile>({
         initialValues: {
             email: userLogin.user.email,
@@ -55,12 +62,6 @@ export default function Profile({ }: Props) {
             dispatch(updateProfileApi(userLogin.user.id, values))
         }
     });
-
-    useEffect(() => {
-        const actionAsync = getBookingProfileIdApi(userLogin.user.id);
-        dispatch(actionAsync)
-    }, []);
-
     return (
         <div className='profile-page pt-3'>
             <div className="container">

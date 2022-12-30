@@ -10,7 +10,8 @@ import 'react-date-range/dist/styles.css'
 import 'react-date-range/dist/theme/default.css'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import { toast } from 'react-toastify';
+import { history } from '../../index';
 type Props = {}
 
 export default function Detail({ }: Props) {
@@ -94,8 +95,22 @@ export default function Detail({ }: Props) {
         const dateIn = target.dateIn.value;
         const dateOut = target.dateOut.value;
         const guest = target.guest.value;
-        const action = postBookingApi(arrDetail?.id, arrDetail?.id, dateIn, dateOut, guest, userLogin.user.id)
-        dispatch(action);
+        if (Object.keys(userLogin).length === 0) {
+            toast.error('Xin hãy đăng nhập để được đặt phòng!!!', {
+                position: "top-center",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+                onClose: () => history.push('/user/login')
+            });
+        } else {
+            const action = postBookingApi(arrDetail?.id, arrDetail?.id, dateIn, dateOut, guest, userLogin.user.id)
+            dispatch(action);
+        }
     }
     return (
         <div className='detail-page-mobile'>

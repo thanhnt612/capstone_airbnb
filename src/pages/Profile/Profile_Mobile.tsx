@@ -25,6 +25,10 @@ export default function Profile({ }: Props) {
   const { arrDetailHistory } = useSelector((state: RootState) => state.bookingReducer);
   const [image, setImage] = useState<File | null>(null);
 
+  if (Object.keys(userLogin).length === 0) {
+    window.location.href = "/user/login";
+  }
+
   const onImageChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (!event.target.files) return
     setImage(event.target.files[0]);
