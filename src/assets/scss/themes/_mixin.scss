@@ -12,7 +12,7 @@
 }
 @mixin responsive($breakpoint) {
   @if $breakpoint == "xs" {
-    @media (min-width: 375px) {
+    @media (min-width: 345px) {
       @content;
     }
   }
