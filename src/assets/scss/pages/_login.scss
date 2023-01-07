@@ -1,7 +1,7 @@
 .login-page {
   .row {
     min-height: 500px;
-    padding: 70px;
+    padding: 100px;
     background-color: $bg-header-light;
     box-shadow: 0 15px 16.83px 0.17px rgba(0, 0, 0, 0.05);
     display: flex;
@@ -12,7 +12,7 @@
         .form-title {
           padding: 20px 0;
         }
-        .register-form {
+        .login-form {
           .form-group {
             margin-bottom: 25px;
             overflow: hidden;
@@ -26,7 +26,8 @@
               display: block;
               border: none;
               outline: none;
-              padding: 6px 30px;
+              padding: 6px ;
+              padding-right: 200px;
             }
           }
           .check-item {

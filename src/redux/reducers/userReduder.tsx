@@ -70,6 +70,19 @@ export const getProfileApi = (id: number) => {
 export const registerApi = (register: UserRegister) => {
     return async (dispatch: DispatchType) => {
         const result = await http.post('/api/auth/signup/', register);
+        if (result.status === 200) {
+            toast.success('Đăng ký tài khoản thành công !!!', {
+                position: "top-center",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+                onClose: () => history.push('/user/login')
+            });
+        }
     };
 };
 export const loginApi = (userLogin: UserLogin) => {

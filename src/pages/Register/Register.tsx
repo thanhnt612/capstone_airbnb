@@ -20,19 +20,6 @@ export type UserRegister = {
 }
 export default function Register({ }: Props) {
   const dispatch: DispatchType = useDispatch();
-  const notify = () => {
-    toast.success('Đăng ký tài khoản thành công!!!', {
-      position: "top-center",
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "colored",
-      onClose: () => history.push('/user/login')
-    });
-  };
   const frm: FormikProps<UserRegister> = useFormik<UserRegister>({
     initialValues: {
       email: '',
@@ -57,7 +44,7 @@ export default function Register({ }: Props) {
         .number()
         .typeError("Xin hãy nhập vào ký tự là số")
         .required("Xin mời nhập vào số điện thoại !!!"),
-      birthday: yup.string().required("Xin mời nhập ngày tháng năm sinh !!!"),
+      birthday: yup.string().required("Xin mời nhập ngày tháng năm sinh !!!")
     }),
     onSubmit: (values: UserRegister) => {
       if (values.gender === 'male') {
@@ -147,6 +134,7 @@ export default function Register({ }: Props) {
                     type="radio"
                     value="male"
                     name="gender"
+                    checked
                     onChange={frm.handleChange}
                   />
                   <label htmlFor="">Male</label>
@@ -160,7 +148,7 @@ export default function Register({ }: Props) {
                   <label htmlFor="">Female</label>
                 </div>
                 <div className="button">
-                  <button type="submit" className="btn-register" onClick={notify}>Đăng Ký</button>
+                  <button type="submit" className="btn-register">Đăng Ký</button>
                   <ToastContainer
                     position="top-center"
                     autoClose={2000}

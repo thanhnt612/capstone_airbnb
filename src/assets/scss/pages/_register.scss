@@ -1,7 +1,7 @@
 .register-page {
   .row {
     min-height: 500px;
-    padding: 30px;
+    padding: 100px;
     background-color: $bg-header-light;
     box-shadow: 0 15px 16.83px 0.17px rgba(0, 0, 0, 0.05);
     display: flex;
@@ -26,7 +26,8 @@
               display: block;
               border: none;
               outline: none;
-              padding: 6px 30px;
+              padding: 6px;
+              padding-right: 200px;
             }
           }
           .radioGroup {
