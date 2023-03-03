@@ -17,11 +17,8 @@ export default function Login({ }: Props) {
       password: ''
     },
     validationSchema: Yup.object().shape({
-      email: Yup
-        .string()
-        .email("Email không đúng định dạng")
-        .required("Xin mời nhập vào email !!!"),
-      password: Yup.string().trim().required("Xin mời nhập vào password !!!"),
+      email: Yup.string().required("Xin mời nhập vào email !!!"),
+      password: Yup.string().required("Xin mời nhập vào password !!!"),
     }),
     onSubmit: (values: UserLogin) => {
       const action = loginApi(values);
@@ -39,7 +36,7 @@ export default function Login({ }: Props) {
                   <img src='../img/logo.png' className='d-block' width="102px" height='32px' alt="" />
                 </NavLink>
                 <h2 className="form-title">Sign in</h2>
-                <form className="login-form" onSubmit={frm.handleSubmit}>
+                <form className="register-form" onSubmit={frm.handleSubmit}>
                   <div className="form-group">
                     <label htmlFor="account"><i className="fa-solid fa-circle-user"></i></label>
                     <input name="email" placeholder="Email" onBlur={frm.handleBlur} onChange={frm.handleChange} />

@@ -135,7 +135,7 @@ export default function HeaderHome({ }: Props) {
       <div className="header-search container">
         <form onSubmit={handleSubmit}>
           <div className="form-fill border row">
-            <div className="location col-3">
+            <div className="location col-6">
               <h4>Địa điểm</h4>
               <div className="destination">
                 <input
@@ -144,34 +144,10 @@ export default function HeaderHome({ }: Props) {
                   placeholder='Tìm kiếm địa điểm' />
               </div>
             </div>
-            <div className="check-in col-3">
-              <h4>Nhận phòng</h4>
-              <div className="date-in">
-                <input type='date' placeholder='Thêm ngày'
-                  name='dateIn'
-                />
-              </div>
-            </div>
-            <div className="check-out col-3">
-              <h4>Trả phòng</h4>
-              <div className="date-out">
-                <input type='date' placeholder='Thêm ngày'
-                  name='dateOut'
-                />
-              </div>
-            </div>
-            <div className="add col-3">
-              <div className="guest col-7">
-                <h4>Khách</h4>
-                <div className="customer">
-                  <input type='number' placeholder='Thêm khách'
-                    name='guest'
-                  />
-                </div>
-              </div>
+            <div className="add col-6">
               <div className="btn col-5">
                 <button type='submit'
-                  onSubmit={onSearchRoom}
+                  onClick={() => onSearchRoom(search)}
                 >
                   <i className='fa fa-search'></i> Tìm kiếm
                 </button>

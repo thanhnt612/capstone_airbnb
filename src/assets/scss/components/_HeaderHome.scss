@@ -116,7 +116,7 @@
         background: $bg-header-light;
         border-radius: 50px;
         align-items: center;
-        padding: 15px 40px;
+        padding: 15px 50px;
         @include responsive("md") {
           font-size: $text-base;
           padding: 7px 35px;
@@ -134,42 +134,16 @@
         .location {
           .destination {
             input {
+              width: 100%;
               border: none;
               outline: none;
-            }
-          }
-        }
-        .check-in {
-          border-left: 1px solid $bg-grey;
-          border-right: 1px solid $bg-grey;
-          .date-in {
-            input {
-              outline: none;
-              border: none;
-            }
-          }
-        }
-        .check-out {
-          border-right: 1px solid $bg-grey;
-          .date-out {
-            input {
-              outline: none;
-              border: none;
             }
           }
         }
         .add {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          .customer {
-            input {
-              outline: none;
-              border: none;
-              width: 90%;
-            }
-          }
+          text-align: end;
           .btn {
+            padding-right: 85px;
             white-space: nowrap;
             button {
               padding: 5px 10px;
@@ -177,6 +151,10 @@
               background: $bg-header-main;
               border-radius: 50px;
               color: $text-c1-light;
+              &:hover {
+                color: $text-c1-main;
+                background-color: $bg-grey;
+              }
               @include responsive("md") {
                 font-size: $text-xs;
               }

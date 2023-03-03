@@ -1,33 +1,51 @@
 .home-page {
   background-image: linear-gradient(174.2deg, #fff4e4 7.1%, #f0f6ee 67.4%);
   .carousel {
-    background: url(../../img/ha2.jpg) center center / cover no-repeat;
     width: 100%;
-    min-height: 850px;
     opacity: 1;
-    top: -80px;
-    &::after {
-      content: "";
-      position: absolute;
-      z-index: 1;
-      top: 0px;
-      left: 0px;
-      width: 100%;
-      min-height: 850px;
-      background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.3));
-      opacity: 0.8;
-    }
-    .introduce {
-      z-index: 5;
+    top: -40px;
+    .slider {
       position: relative;
+      .carousel-inner {
+        .carousel-item {
+          .carousel-caption {
+            h5 {
+              @include text($text-3xl, $text-semiBold, $text-c1-light);
+            }
+            p {
+              @include text($text-xl, $text-semiBold, $text-c1-light);
+            }
+          }
+        }
+      }
+    }
+    .carousel-control-prev-icon {
+      background-size: 50% 50%;
+      background-color: $bg-header-main;
+      border-radius: 50px;
+      padding: 25px;
+    }
+    .carousel-control-next-icon {
+      @extend .carousel-control-prev-icon;
+    }
+
+    .introduce {
+      z-index: 10;
+      position: absolute;
       width: 100%;
       transform: translate(0, 200%);
-      color: $text-c1-light;
+      color: $text-c1-main;
+      left: 200px;
+      top: 100px;
       h3 {
+        animation: FadeInLeft 3s;
+        background-color: #f0f6ee;
+        width: 30%;
+        border-radius: 10px;
+        padding: 10px;
+        font-size: $text-2xl;
       }
-      h4 {
-        padding: 20px 0;
-      }
+
       .btn {
         color: $text-c1-light;
         background-color: $bg-header-main;
@@ -37,6 +55,7 @@
         border-radius: 10px;
         border: 1px solid $bg-header-main;
         transition: box-shadow 600ms ease-in-out, color 300ms ease-in-out;
+        animation: FadeInTop 3s;
         &:hover {
           font-weight: $text-semiBold;
           color: $text-c1-main;
@@ -55,19 +74,34 @@
         .menu {
           .row {
             .list-city {
-              .item {
+              @for $i from 0 to 7 {
+                .item-#{$i + 1} {
+                  animation: FadeInRight (0.3s * $i + 1);
+                }
+              }
+              .list-room {
                 .thumbnail {
+                  overflow: hidden;
                   img {
                     height: 100px;
                     border-radius: 10px;
+                    object-fit: contain;
+                    border-radius: 10px;
+                    cursor: pointer;
+                    transition: 0.3s;
+                    &:hover {
+                      transform: scale(1.7);
+                    }
                   }
                 }
                 .detail {
                   h5 {
                     @include text($text-base, $text-semiBold, $text-c1-dark);
+                    cursor: pointer;
                   }
                   p {
                     @include text($text-base, $text-regular, $text-c1-dark);
+                    cursor: pointer;
                   }
                   .locate {
                     padding: 10px;
@@ -96,7 +130,6 @@
         .row {
           .item {
             padding: 25px;
-
             .thumbnail {
               img {
                 height: 200px;
@@ -107,8 +140,40 @@
               padding-top: 5px;
             }
           }
+          @for $i from 0 to 4 {
+            .item-#{$i + 1} {
+              animation: FadeInTop (1s * $i + 1);
+            }
+          }
         }
       }
     }
+  }
+}
+@keyframes FadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-300px);
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes FadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(300px);
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes FadeInTop {
+  from {
+    opacity: 0;
+    transform: translateY(500px);
+  }
+  to {
+    opacity: 1;
   }
 }

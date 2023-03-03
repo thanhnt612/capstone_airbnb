@@ -5,9 +5,7 @@ import { useDispatch } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 import { DispatchType } from '../../redux/configStore'
 import { registerApi } from '../../redux/reducers/userReduder';
-import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { history } from '../../index';
 type Props = {}
 export type UserRegister = {
   email: string,
@@ -44,7 +42,7 @@ export default function Register({ }: Props) {
         .number()
         .typeError("Xin hãy nhập vào ký tự là số")
         .required("Xin mời nhập vào số điện thoại !!!"),
-      birthday: yup.string().required("Xin mời nhập ngày tháng năm sinh !!!")
+      birthday: yup.string().required("Xin mời nhập ngày tháng năm sinh !!!"),
     }),
     onSubmit: (values: UserRegister) => {
       if (values.gender === 'male') {
@@ -134,7 +132,6 @@ export default function Register({ }: Props) {
                     type="radio"
                     value="male"
                     name="gender"
-                    checked
                     onChange={frm.handleChange}
                   />
                   <label htmlFor="">Male</label>
@@ -149,17 +146,6 @@ export default function Register({ }: Props) {
                 </div>
                 <div className="button">
                   <button type="submit" className="btn-register">Đăng Ký</button>
-                  <ToastContainer
-                    position="top-center"
-                    autoClose={2000}
-                    hideProgressBar={false}
-                    newestOnTop={false}
-                    closeOnClick
-                    rtl={false}
-                    pauseOnFocusLoss
-                    draggable
-                    pauseOnHover
-                    theme="colored" />
                   <span>Bạn đã có tài khoản?</span><NavLink to='/user/login'>Đăng nhập ở đây</NavLink>
                 </div>
               </form>
