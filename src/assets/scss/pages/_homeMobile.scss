@@ -1,47 +1,87 @@
 .home-page-mobile {
   background-image: linear-gradient(174.2deg, #fff4e4 7.1%, #f0f6ee 67.4%);
   .carousel {
-    background: url(../../img/ha2.jpg) center center / cover no-repeat;
     width: 100%;
-    min-height: 500px;
     opacity: 1;
-    &::after {
-      content: "";
-      position: absolute;
-      z-index: 1;
-      top: 0px;
-      left: 0px;
-      width: 100%;
-      min-height: 500px;
-      background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.3));
-      opacity: 0.8;
+    .slider {
+      position: relative;
+      .carousel-inner {
+        img {
+          @include responsive("xs") {
+            height: 200px;
+          }
+          @include responsive("mdd") {
+            height: 400px;
+          }
+        }
+        .carousel-item {
+          .carousel-caption {
+            h5 {
+              @include text($text-2xl, $text-semiBold, $text-c1-main);
+              background-color: $bg-header-light;
+              border-radius: 25px;
+            }
+            p {
+              @include text($text-xl, $text-semiBold, $text-c1-light);
+            }
+          }
+        }
+      }
+    }
+    .carousel-control-prev-icon {
+      background-size: 50% 50%;
+      background-color: $bg-header-main;
+      border-radius: 50px;
+      padding: 24px;
+    }
+    .carousel-control-next-icon {
+      @extend .carousel-control-prev-icon;
     }
     .introduce {
-      z-index: 5;
-      position: relative;
-      width: 100%;
-      transform: translate(0, 90%);
-      color: $text-c1-light;
-      padding: 0 40px;
-      h3 {
-        @include text($text-xl, $text-semiBold, $text-c1-light);
+      z-index: 10;
+      position: absolute;
+      width: 35%;
+      transform: translate(0, 200%);
+      color: $text-c1-main;
+      @include responsive("xs") {
+        display: none;
       }
-      h4 {
-        padding: 20px 0;
-        @extend h3;
+      @include responsive("mdd") {
+        display: block;
+        width: 40%;
+        left: 75px;
+        top: -45px;
+      }
+      h3 {
+        animation: FadeInLeft 3s;
+        background-color: #f0f6ee;
+        width: 100%;
+        border-radius: 10px;
+        padding: 10px;
+        @include responsive("xs") {
+          font-size: $text-xs;
+        }
+        @include responsive("mdd") {
+          font-size: $text-base;
+        }
       }
       .btn {
         @include button(
-          $text-xl,
+          $text-base,
           $text-regular,
           $text-c1-light,
           $bg-header-main,
           5px
         );
+        @include responsive("xs") {
+          font-size: $text-xs;
+          padding: 3px;
+        }
         cursor: pointer;
         border-radius: 10px;
         border: 1px solid $bg-header-main;
         transition: box-shadow 600ms ease-in-out, color 300ms ease-in-out;
+        animation: FadeInTop 3s;
         &:hover {
           font-weight: $text-semiBold;
           color: $text-c1-main;
@@ -63,19 +103,34 @@
         .menu {
           .row {
             .list-city {
-              .item {
+              @for $i from 0 to 7 {
+                .item-#{$i + 1} {
+                  animation: FadeInRight (0.5s * $i + 1);
+                }
+              }
+              .list-room {
                 .thumbnail {
+                  overflow: hidden;
                   img {
                     height: 100px;
                     border-radius: 10px;
+                    object-fit: contain;
+                    border-radius: 10px;
+                    cursor: pointer;
+                    transition: 0.3s;
+                    &:hover {
+                      transform: scale(1.7);
+                    }
                   }
                 }
                 .detail {
                   h5 {
                     @include text($text-xl, $text-semiBold, $text-c1-dark);
+                    cursor: pointer;
                   }
                   p {
                     @include text($text-base, $text-regular, $text-c1-dark);
+                    cursor: pointer;
                   }
                   .locate {
                     padding: 10px;
@@ -101,14 +156,25 @@
           h3 {
           }
         }
-        .row {
-          .item {
+        .main {
+          @for $i from 0 to 4 {
+            .item-#{$i + 1} {
+              animation: FadeInTop (1s * $i + 1);
+            }
+          }
+          .service {
             padding: 25px;
             text-align: center;
             .thumbnail {
               img {
-                height: 200px;
+                height: 300px;
                 border-radius: 10px;
+                @include responsive("xs") {
+                  height: 200px;
+                }
+                @include responsive("mdd") {
+                  height: 300px;
+                }
               }
             }
             p {

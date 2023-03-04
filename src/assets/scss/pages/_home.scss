@@ -8,6 +8,14 @@
       position: relative;
       .carousel-inner {
         .carousel-item {
+          img {
+            @include responsive("md") {
+              height: 500px;
+            }
+            @include responsive("lg") {
+              height: 850px;
+            }
+          }
           .carousel-caption {
             h5 {
               @include text($text-3xl, $text-semiBold, $text-c1-light);
@@ -32,18 +40,40 @@
     .introduce {
       z-index: 10;
       position: absolute;
-      width: 100%;
+      width: 20%;
       transform: translate(0, 200%);
       color: $text-c1-main;
       left: 200px;
       top: 100px;
+      @include responsive("mdd") {
+        width: 40%;
+        left: 90px;
+        top: 20px;
+      }
+      @include responsive("lg") {
+        width: 35%;
+        left: 200px;
+        top: 100px;
+      }
+      @include responsive("xl") {
+        width: 30%;
+      }
+      @include responsive("xxl") {
+        width: 23%;
+      }
       h3 {
         animation: FadeInLeft 3s;
         background-color: #f0f6ee;
-        width: 30%;
+        width: 100%;
         border-radius: 10px;
         padding: 10px;
         font-size: $text-2xl;
+        @include responsive("mdd") {
+          font-size: $text-xl;
+        }
+        @include responsive("lg") {
+          font-size: $text-2xl;
+        }
       }
 
       .btn {

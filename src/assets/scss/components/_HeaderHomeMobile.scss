@@ -111,6 +111,11 @@
               background: $bg-header-main;
               border-radius: 50px;
               color: $text-c1-light;
+              &:hover {
+                color: $text-c1-main;
+                background-color: $bg-grey;
+                transition: 0.6s;
+              }
             }
           }
         }
