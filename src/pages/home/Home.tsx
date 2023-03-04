@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react'
+import React, { useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { DispatchType, RootState } from '../../redux/configStore';
@@ -152,7 +152,7 @@ export default function Home({ }: Props) {
               <h3>Khám phá những điểm đến gần đây</h3>
             </div>
             <div className="menu pt-5" ref={content}>
-              <div className="row">
+              <div className="list-choose row">
                 {arrBooking.map((location, index) => {
                   return <div className="list-city col-xl-3 col-lg-4 col-md-6 pb-3" key={index}>
                     <div className={`list-room item-${index} d-flex p-3 bg-light border border-2 
@@ -168,9 +168,11 @@ export default function Home({ }: Props) {
                           {location.tinhThanh} , {location.quocGia}
                         </h5>
                         <p onClick={() => onList(location.id)}>{location.tenViTri}</p>
-                        <button className="locate" onClick={() => onList(location.id)}>
-                          Danh sách phòng
-                        </button>
+                        <div className="locate">
+                          <button className="btn" onClick={() => onList(location.id)}>
+                            Danh sách phòng
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -182,26 +184,26 @@ export default function Home({ }: Props) {
             <div className="tittle">
               <h3>Ở bất cứ đâu</h3>
             </div>
-            <div className="row">
-              <div className="item wow item-1 col-lg-3 col-md-6">
+            <div className="main row">
+              <div className="service wow item-1 col-lg-3 col-md-6">
                 <div className="thumbnail">
                   <img src="/img/home/home.png" className='w-100' alt="" />
                 </div>
                 <p>Toàn bộ nhà</p>
               </div>
-              <div className="item wow item-2 col-lg-3 col-md-6">
+              <div className="service wow item-2 col-lg-3 col-md-6">
                 <div className="thumbnail">
                   <img src="/img/home/special.jpg" className='w-100 ' alt="" />
                 </div>
                 <p>Chỗ ở độc đáo</p>
               </div>
-              <div className="item wow item-3 col-lg-3 col-md-6">
+              <div className="service wow item-3 col-lg-3 col-md-6">
                 <div className="thumbnail">
                   <img src="/img/home/farm.jpg" className='w-100' alt="" />
                 </div>
                 <p>Trang trại và thiên nhiên</p>
               </div>
-              <div className="item wow item-4 col-lg-3 col-md-6">
+              <div className="service wow item-4 col-lg-3 col-md-6">
                 <div className="thumbnail">
                   <img src="/img/home/dog.png" className='w-100' alt="" />
                 </div>

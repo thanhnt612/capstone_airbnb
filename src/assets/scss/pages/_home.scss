@@ -67,12 +67,8 @@
   .content {
     .container {
       .list {
-        .tittle {
-          h3 {
-          }
-        }
         .menu {
-          .row {
+          .list-choose {
             .list-city {
               @for $i from 0 to 7 {
                 .item-#{$i + 1} {
@@ -104,16 +100,18 @@
                     cursor: pointer;
                   }
                   .locate {
-                    padding: 10px;
-                    font-style: $text-base;
-                    border-radius: 10px;
-                    color: $text-c1-main;
-                    border: 1px solid $bg-header-main;
-                    transition: box-shadow 500ms ease-in-out,
-                      color 300ms ease-in-out;
-                    &:hover {
-                      color: $text-c1-light;
-                      box-shadow: 0 0 40px 40px $bg-header-main inset;
+                    .btn {
+                      padding: 10px;
+                      font-style: $text-base;
+                      border-radius: 10px;
+                      color: $text-c1-main;
+                      border: 1px solid $bg-header-main;
+                      &:hover {
+                        color: $text-c1-light;
+                        background-color: $bg-header-main;
+                        border: 1px solid $bg-header-main;
+                        transition: 0.5s;
+                      }
                     }
                   }
                 }
@@ -123,12 +121,13 @@
         }
       }
       .convenient {
-        .tittle {
-          h3 {
+        .main {
+          @for $i from 0 to 4 {
+            .item-#{$i + 1} {
+              animation: FadeInTop (1s * $i + 1);
+            }
           }
-        }
-        .row {
-          .item {
+          .service {
             padding: 25px;
             .thumbnail {
               img {
@@ -138,11 +137,6 @@
             }
             p {
               padding-top: 5px;
-            }
-          }
-          @for $i from 0 to 4 {
-            .item-#{$i + 1} {
-              animation: FadeInTop (1s * $i + 1);
             }
           }
         }
