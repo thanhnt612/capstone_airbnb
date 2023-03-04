@@ -147,7 +147,7 @@ export default function Detail({ }: Props) {
                         </ul>
                     </div>
                 </div>
-                <div className="image">
+                <div className="image wow">
                     <img src={arrDetail?.hinhAnh} className='w-100 h-100' alt="" />
                 </div>
                 <div className="description">

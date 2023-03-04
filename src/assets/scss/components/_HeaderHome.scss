@@ -93,7 +93,9 @@
                 background: $bg-header-light;
                 color: $text-c1-dark;
                 &:hover {
-                  background: $bg-grey;
+                  background: $bg-header-main;
+                  color: $text-c1-light;
+                  transition: 0.3s;
                 }
               }
             }
