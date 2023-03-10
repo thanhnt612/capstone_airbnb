@@ -26,7 +26,8 @@ export default function Home({ }: Props) {
   return (
     <div className='home-page'>
       <div className="carousel">
-        <div id="carouselExampleCaptions" className="slider carousel slide" data-bs-ride="false">
+        <div id="carouselExampleCaptions" className="slider carousel slide" 
+        data-bs-ride="carousel">
           <div className="introduce container">
             <h3>Hãy bắt đầu những chuyến du lịch</h3>
             <button className='btn'
@@ -45,7 +46,7 @@ export default function Home({ }: Props) {
             <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to={7} aria-label="Slide 8" />
           </div>
           <div className="carousel-inner">
-            <div className="carousel-item active">
+            <div className="carousel-item active" data-bs-interval="2000">
               <img src="../../img/slider/tphcm.jpg"
                 className="d-block"
                 width="100%"
@@ -56,7 +57,7 @@ export default function Home({ }: Props) {
                 <p>Quận 1.</p>
               </div>
             </div>
-            <div className="carousel-item">
+            <div className="carousel-item" data-bs-interval="2000">
               <img src="../../img/slider/hanoi.jpg"
                 className="d-block"
                 width="100%"
@@ -67,7 +68,7 @@ export default function Home({ }: Props) {
                 <p>Hồ Gươm</p>
               </div>
             </div>
-            <div className="carousel-item">
+            <div className="carousel-item" data-bs-interval="2000">
               <img src="../../img/slider/cantho.jpg"
                 className="d-block"
                 width="100%"
@@ -78,7 +79,7 @@ export default function Home({ }: Props) {
                 <p>Cái Răng</p>
               </div>
             </div>
-            <div className="carousel-item">
+            <div className="carousel-item" data-bs-interval="2000">
               <img src="../../img/slider/nhatrang.jpg"
                 className="d-block"
                 width="100%"
@@ -89,7 +90,7 @@ export default function Home({ }: Props) {
                 <p>Nha Trang</p>
               </div>
             </div>
-            <div className="carousel-item">
+            <div className="carousel-item" data-bs-interval="2000">
               <img src="../../img/slider/phuquoc.jpg"
                 className="d-block"
                 width="100%"
@@ -100,7 +101,7 @@ export default function Home({ }: Props) {
                 <p>Venice Phú Quốc</p>
               </div>
             </div>
-            <div className="carousel-item">
+            <div className="carousel-item" data-bs-interval="2000">
               <img src="../../img/slider/danang.jpg"
                 className="d-block"
                 width="100%"
@@ -111,7 +112,7 @@ export default function Home({ }: Props) {
                 <p>Cầu Rồng</p>
               </div>
             </div>
-            <div className="carousel-item">
+            <div className="carousel-item" data-bs-interval="2000">
               <img src="../../img/slider/dalat.jpg"
                 className="d-block"
                 width="100%"
@@ -122,7 +123,7 @@ export default function Home({ }: Props) {
                 <p>LangBiang - Đà Lạt</p>
               </div>
             </div>
-            <div className="carousel-item">
+            <div className="carousel-item" data-bs-interval="2000">
               <img src="../../img/slider/phanthiet.jpg"
                 className="d-block"
                 width="100%"
@@ -153,29 +154,29 @@ export default function Home({ }: Props) {
             <div className="menu pt-5" ref={content}>
               <div className="list-choose row">
                 {arrBooking.map((location, index) => {
-                  if(location.id < 9){
-                  return <div className="list-city col-xl-3 col-lg-4 col-md-6 pb-3" key={index}>
-                    <div className={`list-room item-${index} d-flex p-3 bg-light border border-2 
+                  if (location.id < 9) {
+                    return <div className="list-city col-xl-3 col-lg-4 col-md-6 pb-3" key={index}>
+                      <div className={`list-room item-${index} d-flex p-3 bg-light border border-2 
                       border-success border-opacity-25 rounded wow`}>
-                      <div className="thumbnail col-4 pe-3">
-                        <img src={location.hinhAnh}
-                          className='w-100' alt=""
-                          onClick={() => onList(location.id)}
-                        />
-                      </div>
-                      <div className="detail col-8">
-                        <h5 onClick={() => onList(location.id)}>
-                          {location.tinhThanh} , {location.quocGia}
-                        </h5>
-                        <p onClick={() => onList(location.id)}>{location.tenViTri}</p>
-                        <div className="locate">
-                          <button className="btn" onClick={() => onList(location.id)}>
-                            Danh sách phòng
-                          </button>
+                        <div className="thumbnail col-4 pe-3">
+                          <img src={location.hinhAnh}
+                            className='w-100' alt=""
+                            onClick={() => onList(location.id)}
+                          />
+                        </div>
+                        <div className="detail col-8">
+                          <h5 onClick={() => onList(location.id)}>
+                            {location.tinhThanh} , {location.quocGia}
+                          </h5>
+                          <p onClick={() => onList(location.id)}>{location.tenViTri}</p>
+                          <div className="locate">
+                            <button className="btn" onClick={() => onList(location.id)}>
+                              Danh sách phòng
+                            </button>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
                   }
                 })}
               </div>
