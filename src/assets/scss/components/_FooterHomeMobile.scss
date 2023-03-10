@@ -5,7 +5,7 @@
     padding: 20px;
     display: flex;
     .footer-1 {
-      animation: FadeInTop 2s;
+      animation: FadeInTop 3s;
       p {
         font-weight: $text-bold;
       }
@@ -66,14 +66,5 @@
         }
       }
     }
-  }
-}
-@keyframes FadeInTop {
-  from {
-    opacity: 0;
-    transform: translateY(500px);
-  }
-  to {
-    opacity: 1;
   }
 }

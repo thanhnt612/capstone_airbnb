@@ -11,7 +11,7 @@
       }
       @for $i from 0 to 4 {
         .item-#{$i + 1} {
-          animation: FadeInRight (1s * $i + 1);
+          animation: FadeInTop (1s * $i + 1);
         }
       }
       .list-choose {
@@ -113,21 +113,4 @@
     }
   }
 }
-@keyframes FadeInRight {
-  from {
-    opacity: 0;
-    transform: translateX(300px);
-  }
-  to {
-    opacity: 1;
-  }
-}
-@keyframes FadeInTop {
-  from {
-    opacity: 0;
-    transform: translateY(500px);
-  }
-  to {
-    opacity: 1;
-  }
-}
+

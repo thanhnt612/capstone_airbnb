@@ -43,7 +43,6 @@ export default function Home({ }: Props) {
             <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to={5} aria-label="Slide 6" />
             <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to={6} aria-label="Slide 7" />
             <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to={7} aria-label="Slide 8" />
-            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to={8} aria-label="Slide 9" />
           </div>
           <div className="carousel-inner">
             <div className="carousel-item active">
@@ -154,6 +153,7 @@ export default function Home({ }: Props) {
             <div className="menu pt-5" ref={content}>
               <div className="list-choose row">
                 {arrBooking.map((location, index) => {
+                  if(location.id < 9){
                   return <div className="list-city col-xl-3 col-lg-4 col-md-6 pb-3" key={index}>
                     <div className={`list-room item-${index} d-flex p-3 bg-light border border-2 
                       border-success border-opacity-25 rounded wow`}>
@@ -176,6 +176,7 @@ export default function Home({ }: Props) {
                       </div>
                     </div>
                   </div>
+                  }
                 })}
               </div>
             </div>

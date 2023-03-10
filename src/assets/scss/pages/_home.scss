@@ -102,7 +102,7 @@
             .list-city {
               @for $i from 0 to 7 {
                 .item-#{$i + 1} {
-                  animation: FadeInRight (0.3s * $i + 1);
+                  animation: FadeInRight (0.1s * $i + 1);
                 }
               }
               .list-room {
@@ -154,7 +154,7 @@
         .main {
           @for $i from 0 to 4 {
             .item-#{$i + 1} {
-              animation: FadeInTop (1s * $i + 1);
+              animation: FadeInTop (0.1s * $i + 1);
             }
           }
           .service {

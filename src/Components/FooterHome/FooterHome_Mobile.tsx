@@ -7,7 +7,7 @@ export default function Footerhome({ }: Props) {
     return (
         <div className='footer-mobile'>
             <div className="container">
-                <div className="list-footer row">
+                <div className="list-footer wow row">
                     <div className="footer-1 col-6">
                         <p>Hỗ trợ</p>
                         <ul>
